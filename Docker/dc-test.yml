@@ -1,0 +1,12 @@
+version: "3.3"
+services:      
+  vdg_api:
+    image: vedag_api
+    ports: 
+      - 6000:8080
+
+    networks:
+      - backend
+
+networks:
+  backend:
