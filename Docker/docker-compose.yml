@@ -19,12 +19,23 @@ services:
       - vdg_db
     image: vedag_api
     ports: 
-      - 6000:8080
+      - 9000:8080
     networks:
       - backend
+      - frontend
+
+  vdg_client:
+    depends_on:
+      - vdg_api
+    image: vedag_client
+    ports: 
+      - 8000:80
+    networks:
+      - frontend
 
 volumes:
   db-data:
 
 networks:
   backend:
+  frontend:
