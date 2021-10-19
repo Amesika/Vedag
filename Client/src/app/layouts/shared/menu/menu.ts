@@ -3,16 +3,8 @@ import { MenuItem } from './menu.model';
 export const MENU: MenuItem[] = [
     {
         label: 'Tableau de bord',
-        isTitle: true
-    },
-    {
-        label: 'Tableau de bord',
         icon: 'home',
         link: '/'
-    },
-    {
-        label: 'Analyse',
-        isTitle: true
     },
     {
         label: 'Analyse',
@@ -23,10 +15,6 @@ export const MENU: MenuItem[] = [
                 link: '/apps/journal-prev',
             }
         ]
-    },
-    {
-        label: 'Comptabilité',
-        isTitle: true
     },
     {
         label: 'Comptabilité',
@@ -74,10 +62,6 @@ export const MENU: MenuItem[] = [
                 link: '/apps/graphique',
             }
         ]
-    },
-    {
-        label: 'Espace de Travail',
-        isTitle: true
     },
     {
         label: 'Espace de Travail',

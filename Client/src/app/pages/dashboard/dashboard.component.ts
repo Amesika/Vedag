@@ -40,6 +40,8 @@ export class DashboardComponent implements OnInit {
   salesDonutChart: ChartType;
   ordersData: OrdersTable[];
 
+  debts: AccountSolde[] = [];
+
   basicColumChart: ChartType;
 
   ngOnInit() {
@@ -65,10 +67,14 @@ export class DashboardComponent implements OnInit {
     this.jrService.getAccountSolde(this.currentNs.id, this.currentFy.id)
     .subscribe((accountSoldes) => {
       this.accountSoldes = accountSoldes;
-      console.log(this.accountSoldes)
       this.accountSoldes.forEach(item => {
         this.total = this.total + item.solde
       });
+    });
+
+    this.jrService.getDebt(this.currentNs.id, this.currentFy.id)
+    .subscribe((accountSoldes) => {
+      this.debts = accountSoldes;
     });
 
    

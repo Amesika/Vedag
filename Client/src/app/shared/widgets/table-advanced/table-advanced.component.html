@@ -33,7 +33,7 @@
             <tbody>
                 <tr *ngFor="let item1 of source.data">
                     <td *ngFor="let head of source.headers">
-                        <ngb-highlight [ngClass]="getColor(item1,head)" [result]="getResult(item1,head)"
+                        <ngb-highlight appNbcolor [isNV]='getIsAmount(head)' [numberV]="getResult(item1,head)"  [result]="getResult(item1,head)"
                             [term]="source.ts.searchTerm"></ngb-highlight>
                     </td>
                     <td *ngIf="source.star.show">
@@ -53,7 +53,7 @@
                     </td>
                 </tr>
                 <tr *ngIf="source.show.footerTotal" class="tr-footer">
-                    <td *ngFor="let footer of source.footers" [attr.colspan]="footer.colspan">
+                    <td *ngFor="let footer of source.footers" appNbcolor [numberV]="getTotalValue(footer)"[attr.colspan]="footer.colspan">
                         {{getTotalValue(footer)}}
                     </td>
                 </tr>

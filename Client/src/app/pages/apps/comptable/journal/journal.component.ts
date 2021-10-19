@@ -48,7 +48,6 @@ export class JournalComponent implements OnInit {
       tableSource.setProperties(this.tableSource)
       this.tableSourceMonths.push(tableSource)
 
-      console.log(this.tableSourceMonths)
     });
 
   }
@@ -56,9 +55,9 @@ export class JournalComponent implements OnInit {
   _fetchData() {
     this.tableSource.ts.nsId = this.currentNs.id
     this.tableSource.ts.fyId = this.currentFy.id
-    console.log(this.tableSource.ts)
+
     this.jrService.getSortOrder(this.tableSource.ts).subscribe((data) => {
-      console.log(data)
+
       this.tableSource.data = data.content;
       //this.tableSource = tableSource;
       this.tableSource.ts.totalItems = data.totalElements
@@ -80,7 +79,7 @@ export class JournalComponent implements OnInit {
     this.tableSourceMonths[index].ts.nsId = this.currentNs.id
     this.tableSourceMonths[index].ts.fyId = this.currentFy.id
     this.tableSourceMonths[index].title = month + " - " + this.year;
-    console.log(this.tableSource.ts)
+
     this.jrService.getByNsidFyidMonth(index, this.tableSource.ts).subscribe((data) => {
 
       this.tableSourceMonths[index].data = data;
@@ -122,7 +121,7 @@ export class JournalComponent implements OnInit {
 
 
   actionsEventHandle($event, content) {
-    console.log($event)
+
     switch ($event.info.action) {
       case 'update':
         /*this.haveForm = true
@@ -159,9 +158,7 @@ export class JournalComponent implements OnInit {
     //this._fetchData();
   }
 
-  fetchDataEventHandle(month, index) {
-    console.log(index)
-   
+  fetchDataEventHandle(month, index) {   
     this._fetchDataByMonth(month, index)
   }
 
@@ -184,7 +181,7 @@ export class JournalComponent implements OnInit {
   }
 
   inputJournalRow() {
-    console.log('create')
+
     this.router.navigate(['apps/jr-create'], { state: { 
       backUrl: 'apps/journal'
     } })

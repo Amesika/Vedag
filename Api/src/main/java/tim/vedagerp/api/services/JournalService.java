@@ -548,4 +548,35 @@ public class JournalService {
 		return bigDecimal.floatValue();
 	}
 
+	public List<AccountSolde> debt(Long nsId, Long fyId) {
+		// Liste des comptes
+		Date start = new Date();
+		Date end = new Date();
+		start = fiscalYearRepository.findById(fyId).get().getStartDate();
+		end = fiscalYearRepository.findById(fyId).get().getEndDate();
+
+		List<Account> accounts1 = accountRepository.getSubAccounts(nsId, "1640");
+		List<Account> accounts2 = accountRepository.getSubAccounts(nsId, "5120");
+
+		List<AccountSolde> accountSoldes = new ArrayList<>();
+
+		// Liste des soldes plus comptes
+		for (Account account : accounts1) {
+			AccountSolde accountSolde = new AccountSolde();
+			accountSolde.setAccount(account);
+			accountSolde.setSolde(this.getSoldeByNsidSd(nsId, start, end, account.getId())*(-1));
+			if(accountSolde.getSolde()<0)
+				accountSoldes.add(accountSolde);
+		}
+		for (Account account : accounts2) {
+			AccountSolde accountSolde = new AccountSolde();
+			accountSolde.setAccount(account);
+			accountSolde.setSolde(this.getSoldeByNsidSd(nsId, start, end, account.getId()));
+			if(accountSolde.getSolde()<0)
+				accountSoldes.add(accountSolde);
+		}
+
+		return accountSoldes;
+	}
+
 }

@@ -58,23 +58,18 @@ export class CompteService {
 
     // Créer plusieurs comptes
     postAll(body: any): Observable<any> {
-        console.log(body)
         const requestUrl = `${this.href}${this.apiUrl}/all`;
-        console.log(requestUrl)
         return this._http.post<any>(requestUrl, body)
     }
 
     // Créer un compte
     post(body: any) {
-        console.log(body)
         const requestUrl = `${this.href}${this.apiUrl}`;
-        console.log(requestUrl)
         return this._http.post<any>(requestUrl, body);
     }
 
     // Modifier un compte
     put(body: any): Observable<any> {
-        console.log(body)
         const requestUrl = `${this.href}${this.apiUrl}`;
         return this._http.put<any>(requestUrl, body)
     }

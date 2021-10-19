@@ -46,7 +46,6 @@ export class NsComponent implements OnInit {
 
   ngOnInit(): void {
     this.tableSource = tableSource;
-    console.log(this.tableSource)
     this._fetchData()
     this._fetchAllData();
 
@@ -68,7 +67,7 @@ export class NsComponent implements OnInit {
   }
 
   actionsEventHandle($event, content) {
-    console.log($event)
+
     switch ($event.info.action) {
       case 'update':
         this.haveForm = true;
@@ -100,9 +99,9 @@ export class NsComponent implements OnInit {
   }
 
   callDeleteEvent($event) {
-    console.log($event)
+
     this.nsService.delete($event).subscribe((data)=>{
-        console.log(data)
+
         this.callNsFormEvent(data)
     });
   }

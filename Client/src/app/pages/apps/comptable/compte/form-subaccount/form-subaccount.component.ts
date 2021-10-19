@@ -49,7 +49,7 @@ export class FormSubaccountComponent implements OnInit {
         number1: ['', [Validators.required]],
       });
     }
-    console.log(this.txt)
+
     this.compteService.getAllRef(this.nsService.currentNs().id).subscribe((accounts) => {
       this.accounts = accounts;
       if(this.account && this.account.account){
@@ -143,7 +143,6 @@ export class FormSubaccountComponent implements OnInit {
       });
     }
 
-    console.log(this.selectAccount)
   }
 
 

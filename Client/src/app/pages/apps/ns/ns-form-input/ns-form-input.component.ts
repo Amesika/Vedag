@@ -32,7 +32,6 @@ export class NsFormInputComponent implements OnInit {
     
     if(this.formAction){
       this.texts = formText.find((item)=>item.action==this.formAction).texts
-      console.log(this.texts)
     }
    
     if (this.ns) {

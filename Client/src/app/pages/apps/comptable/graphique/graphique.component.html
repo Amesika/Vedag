@@ -55,13 +55,13 @@
                         <tbody>
                             <tr *ngFor="let item of all; let index = index">
                                 <th scope="row">{{item.fy.name}}</th>
-                                <th [ngClass]="getColor(row.solde)" (click)="getBudget(item,index)" class="cell" *ngFor="let row of item.resultatsSolde; let index = index" scope="col">
-                                    <div>{{row.solde| number : '1.2-2'}}</div>
-                                    <div class="prev-class">{{row.soldeprev| number : '1.2-2'}}</div>
+                                <th  (click)="getBudget(item,index)" class="cell" *ngFor="let row of item.resultatsSolde; let index = index" scope="col">
+                                    <div><app-number [value]='row.solde'></app-number></div>
+                                    <div class="prev-class"><app-number [value]='row.soldeprev'></app-number></div>
                                 </th>
-                                <td [ngClass]="getColor(getSum(item.resultatsSolde))" class="cell">
-                                    {{getSum(item.resultatsSolde)| number : '1.2-2'}}
-                                    <div class="prev-class">{{getSumPrev(item.resultatsSolde)| number : '1.2-2'}}</div>
+                                <td class="cell">
+                                    <app-number [value]='getSum(item.resultatsSolde)'></app-number>
+                                    <div class="prev-class"><app-number [value]='getSumPrev(item.resultatsSolde)'></app-number></div>
                                 </td>
                             </tr> 
                         </tbody>

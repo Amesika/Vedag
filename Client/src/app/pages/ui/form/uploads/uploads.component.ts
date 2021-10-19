@@ -30,7 +30,7 @@ export class UploadsComponent implements OnInit {
    * @param $event
    */
   onUploadError($event: any) {
-    console.log($event);
+    
   }
 
   /**
@@ -38,6 +38,6 @@ export class UploadsComponent implements OnInit {
    * @param $event
    */
   onUploadSuccess($event: any) {
-    console.log($event);
+   
   }
 }

@@ -54,7 +54,7 @@ export class CompteComponent implements OnInit {
     this.tableSource.ts.option = this.typeAccount
     this.tableSource.ts.nsId = this.currentNs.id
     this.compteService.getSortOrder(this.tableSource.ts).subscribe((data) => {
-      console.log( data.content)
+
       this.tableSource.data = data.content;
       //this.tableSource = tableSource;
 
@@ -74,7 +74,7 @@ export class CompteComponent implements OnInit {
   }
 
   actionsEventHandle($event, content) {
-    console.log($event)
+
     switch ($event.info.action) {
       case 'update':
         this.setHaveForm();

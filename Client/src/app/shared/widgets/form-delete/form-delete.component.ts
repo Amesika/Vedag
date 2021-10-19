@@ -41,7 +41,6 @@ export class FormDeleteComponent implements OnInit {
 
     if (this.formAction) {
       this.texts = formText.find((item) => item.action == this.formAction).texts
-      console.log(this.texts)
     }
     this.formDelete = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -60,7 +59,6 @@ export class FormDeleteComponent implements OnInit {
     }
 
     if (this.formDelete.valid) {
-      console.log("Delete - start") 
       this.callNsFormEvent(this.item.id) 
     }
   }

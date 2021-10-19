@@ -41,7 +41,7 @@ export class FormAccountComponent implements OnInit {
         number: [''],
       });
     }
-    console.log(this.txt)
+
   }
 
   crudAccount() {

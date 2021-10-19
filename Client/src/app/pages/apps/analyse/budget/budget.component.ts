@@ -71,8 +71,6 @@ export class BudgetComponent implements OnInit {
     let start = moment([this.selectYear, this.selectMonth]).format("DD-MM-yyyy");
     let end = moment([this.selectYear, this.selectMonth.valueOf() + 1]).format("DD-MM-yyyy");
 
-    console.log(start)
-    console.log(end )
     /**
      * Fetches the data
      */
@@ -174,7 +172,6 @@ export class BudgetComponent implements OnInit {
       let start2 = moment([moment(this.year.startDate).year(), this.month.id]).format("-MM-yyyy");
       end =   moment(start).daysInMonth() + start2
     }
-    console.log(this.month.id)
     this.getBudget(start,end);
   }
 

@@ -66,7 +66,6 @@ const formInputTxt = [
 ]
 
 function u(){
-  console.log("u")
 }
 
 export { tableSource,formDeleteTxt,formInputTxt };

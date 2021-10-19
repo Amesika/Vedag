@@ -51,7 +51,6 @@ export class FormFyComponent implements OnInit {
         endDate: ['', [Validators.required]],
       });
     }
-    console.log(this.txt)
   }
 
     /**

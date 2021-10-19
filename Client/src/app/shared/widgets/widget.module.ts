@@ -28,6 +28,8 @@ import { TablesModule } from 'src/app/pages/ui/tables/tables.module';
 import { UiRoutingModule } from 'src/app/pages/ui/ui-routing.module';
 import { TableAdvancedComponent } from './table-advanced/table-advanced.component';
 import { AdvancedSortableDirective } from './table-advanced/table-advanced-sortable.directive';
+import { NbcolorDirective } from './nbcolor.directive';
+import { NumberComponent } from './number/number.component';
 
 @NgModule({
     // tslint:disable-next-line: max-line-length
@@ -47,7 +49,9 @@ import { AdvancedSortableDirective } from './table-advanced/table-advanced-sorta
         ActivitiesComponent,
         FormDeleteComponent,
         AdvancedSortableDirective,
-        TableAdvancedComponent],
+        TableAdvancedComponent,
+        NbcolorDirective,
+        NumberComponent],
     imports: [
         CommonModule,
         NgApexchartsModule,
@@ -74,7 +78,10 @@ import { AdvancedSortableDirective } from './table-advanced/table-advanced-sorta
         ActivitiesComponent,
         FormDeleteComponent,
         AdvancedSortableDirective,
-        TableAdvancedComponent]
+        TableAdvancedComponent,
+        NbcolorDirective,
+        NumberComponent
+    ]
 })
 export class WidgetModule { }
 

@@ -42,9 +42,9 @@ export class FiscalYearComponent implements OnInit {
 
   _fetchData() {
     this.tableSource.ts.nsId = this.currentNs.id
-    console.log(this.tableSource.ts)
+
     this.fyService.getSortOrder(this.tableSource.ts).subscribe((data) => {
-      console.log(data)
+
       this.tableSource.data = data.content;
       //this.tableSource = tableSource;
       this.tableSource.ts.totalItems = data.totalElements
@@ -88,7 +88,7 @@ export class FiscalYearComponent implements OnInit {
 
 
   actionsEventHandle($event, content) {
-    console.log($event)
+
     switch ($event.info.action) {
       case 'update':
         this.haveForm = true

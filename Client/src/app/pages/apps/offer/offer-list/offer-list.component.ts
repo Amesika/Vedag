@@ -33,7 +33,6 @@ export class OfferListComponent implements OnInit {
    * Fetches the Projects data
    */
   private _fetchData() {
-    console.log("fetch data")
     this._OfferService.list().subscribe((offers)=>{
       this.offers = offers;
     })
@@ -43,14 +42,11 @@ export class OfferListComponent implements OnInit {
     this.offer = offer;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((res) => {
       this.closeModal = `Closed with: ${res}`;
-      console.log(this.closeModal);
       this._OfferService.delete(offer.id).subscribe((message)=>{
-        console.log(message);
         this._fetchData();
       })
     }, (res) => {
       this.closeModal = `Dismissed ${this.getDismissReason(res)}`;
-      console.log(this.closeModal);
     });
   }
 

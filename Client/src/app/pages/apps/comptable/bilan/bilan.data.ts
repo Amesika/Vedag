@@ -108,7 +108,7 @@ const formInputTxt = [
 ]
 
 function u() {
-  console.log("u")
+
 }
 
 export { tableSourceActif, tableSourcePassif, formDeleteTxt, formInputTxt };

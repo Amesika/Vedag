@@ -24,6 +24,7 @@ import { BilanComponent } from './bilan/bilan.component';
 import { BalanceComponent } from './balance/balance.component';
 import { ResultatComponent } from './resultat/resultat.component';
 import { GraphiqueComponent } from './graphique/graphique.component';
+import { DebtComponent } from './debt/debt.component';
 
 @NgModule({
   declarations: [
@@ -38,8 +39,10 @@ import { GraphiqueComponent } from './graphique/graphique.component';
     BilanComponent,
     BalanceComponent,
     ResultatComponent,
-    GraphiqueComponent
+    GraphiqueComponent,
+    DebtComponent
   ],
+  exports:[DebtComponent],
   imports: [
     CommonModule,
     ComptableRoutingModule,

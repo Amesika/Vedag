@@ -8,7 +8,6 @@ export class StatusPipe implements PipeTransform {
 
   transform(value: string): any {
     let rep;
-    console.log(value)
     switch (value) {
       case "NEW":
         rep = "Nouveau"

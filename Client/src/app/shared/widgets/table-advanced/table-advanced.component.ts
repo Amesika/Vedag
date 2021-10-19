@@ -49,23 +49,19 @@ export class TableAdvancedComponent implements OnInit {
     let event = new ActionEmit
     event.data = table;
     event.info = item;
-    console.log(event)
     this.actionsEvent.emit(event)
   }
 
   pageSizeChanged() {
     this._fetchData();
-    //console.log(this.source.ts.pageSize)
   }
 
   onPageChange(event) {
-    //console.log('Page Changed')
     this.source.ts.page = event;
     this._fetchData();
   }
 
   searchTerm() {
-    //console.log('Search Term')
     this._fetchData();
   }
 
@@ -73,12 +69,7 @@ export class TableAdvancedComponent implements OnInit {
   getResult(item1, head) {
 
     let objet = item1[head.name];
-    // Merge de deux champ
-    /* if (head.merge) {
-       if (item1[head.merge.name1].id == head.merge.id)
-         objet = item1[head.merge.name1]
-       objet = item1[head.merge.name2]
-     }*/
+
     if (head.subname) {
       return objet[head.subname]
     }
@@ -91,39 +82,11 @@ export class TableAdvancedComponent implements OnInit {
     return objet
   }
 
-  getColor(item1, head) {
-    /*if (head.merge) {
-      if (item1[head.merge.debit].id == head.merge.id)
-        return 'debit-color'
-      return 'credit-color'
-    }*/
-    let color = ''
-
-
-    if (head.merge) {
-      if (item1[head.merge.debit].id == head.merge.id) {
-        color = 'debit-color'
-      } else {
-        color = 'credit-color'
-      }
-    } else {
-      color = ''
+  getIsAmount(head) {
+    if (head.dateFormat) {
+      return true
     }
-
-    /** Traitement de couleur numérique 
-* - couleur noir valeur zero
-* - Couleur bleu valeur supérieur à zéro */
-    if (typeof item1[head.name] == 'number' && head.numberFormat) {
-
-      if (item1[head.name] > 0) {
-        color = 'debit-color'
-      } else if(item1[head.name] < 0){
-        color = 'credit-color'
-      }else{
-        color = ''
-      }
-    }
-    return color;
+    return false
   }
 
   getTotalValue(footer) {

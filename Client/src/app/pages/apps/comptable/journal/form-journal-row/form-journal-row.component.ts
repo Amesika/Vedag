@@ -36,13 +36,11 @@ export class FormJournalRowComponent implements OnInit {
     private jrService: JournalRowService, private nsService: NsService, 
     private compteService: CompteService, private jrPrevService: JournalPrevRowService,) {
     this.txt = formInputTxt.find((item) => item.action == 'create')
-    console.log(this.txt)
   }
 
   ngOnInit() {
     const { data, action,backUrl } = history.state
     if (history.state) {
-      console.log(history.state)
       this.backUrl = backUrl;
     }
     this.journalRowForm = this.formBuilder.group({
@@ -106,7 +104,6 @@ export class FormJournalRowComponent implements OnInit {
     }
 
     if (this.journalRowForm.valid) {
-      console.log(this.journalRowForm.get('amount').value)
       jr.amount = this.journalRowForm.get('amount').value;
       jr.dateOperation = this.journalRowForm.get('dateOperation').value;
       jr.label = this.journalRowForm.get('label').value;

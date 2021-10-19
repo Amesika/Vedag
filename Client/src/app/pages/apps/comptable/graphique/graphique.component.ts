@@ -72,8 +72,6 @@ export class GraphiqueComponent implements OnInit {
     this.jrService.getResultatByNs(this.nsService.currentNs().id).subscribe(data => {
       this.all = data;
 
-      console.log(this.all)
-
       this.all.map(element => {
         this.months.forEach((item, index) => {
 

@@ -14,11 +14,13 @@ import { WidgetModule } from '../shared/widgets/widget.module';
 import { UiModule } from './ui/ui.module';
 import { AppsModule } from './apps/apps.module';
 import { OtherModule } from './other/other.module';
+import { ComptableModule } from './apps/comptable/comptable.module';
 
 
 @NgModule({
   declarations: [DashboardComponent],
   imports: [
+    ComptableModule,
     CommonModule,
     FormsModule,
     NgbDropdownModule,

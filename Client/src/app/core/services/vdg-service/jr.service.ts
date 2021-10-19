@@ -40,23 +40,18 @@ export class JournalRowService {
 
     // Créer plusieurs espace de travail
     postAll(body: any): Observable<any> {
-        console.log(body)
         const requestUrl = `${this.href}${this.apiUrl}/all`;
-        console.log(requestUrl)
         return this._http.post<any>(requestUrl, body)
     }
 
     // Créer un espace de travail
     post(body: any) {
-        console.log(body)
         const requestUrl = `${this.href}${this.apiUrl}`;
-        console.log(requestUrl)
         return this._http.post<any>(requestUrl, body);
     }
 
     // Modifier un espace de travail
     put(body: any): Observable<any> {
-        console.log(body)
         const requestUrl = `${this.href}${this.apiUrl}`;
         return this._http.put<any>(requestUrl, body)
     }
@@ -100,6 +95,13 @@ export class JournalRowService {
     getAccountSolde(nsId: number, fyId: number) {
         let requestUrl;
         requestUrl = `${this.href}${this.apiUrl}/banq-account/solde?nsId=${nsId}&fyId=${fyId}`
+        return this._http.get<any>(requestUrl);
+    }
+
+      /**Récuperation de la liste des dettes */
+      getDebt(nsId: number, fyId: number) {
+        let requestUrl;
+        requestUrl = `${this.href}${this.apiUrl}/debt?nsId=${nsId}&fyId=${fyId}`
         return this._http.get<any>(requestUrl);
     }
 

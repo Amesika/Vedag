@@ -53,7 +53,6 @@ export class OfferInputComponent implements OnInit {
   }
 
   validSubmit() {
-    console.log("validSubmit")
     this.submit = true;
 
     if(this.validationform.valid){
@@ -89,12 +88,9 @@ export class OfferInputComponent implements OnInit {
       this.offer.contrat = contrat
       this.offer.profil = this.profil
 
-      console.log("Succes")
       this.submit = false;
-      console.log(this.offer)
       
       this.offerService.create(this.offer).subscribe((data)=>{
-        console.log(data)
         this._router.navigate(['/apps/offer-list']);
       });
     }
@@ -102,7 +98,6 @@ export class OfferInputComponent implements OnInit {
 
 
   back(){
-    console.log("back")
     this._router.navigate([`/apps/offer-list`])
   }
 

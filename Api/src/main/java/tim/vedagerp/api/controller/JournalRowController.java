@@ -132,6 +132,23 @@ public class JournalRowController {
 		}
 	}
 
+	/**
+	 * Récupération de la liste des dettes
+	 * @param fyId
+	 * @param nsId
+	 * @return
+	 */
+	@GetMapping("/debt")
+	public ResponseEntity<?> getDebt(@RequestParam("fyId") Long fyId, @RequestParam("nsId") Long nsId) {
+		try {
+			List<AccountSolde> accountSoldes = new ArrayList<>();
+			accountSoldes = journalService.debt(nsId, fyId);
+			return new ResponseEntity<>(accountSoldes, HttpStatus.OK);
+		} catch (NoSuchElementException ex) {
+			return new ResponseEntity<>("Pas de valeur pour id: " + nsId, HttpStatus.OK);
+		}
+	}
+
 	@GetMapping("/balance")
 	public ResponseEntity<?> getBalance(@RequestParam("nsId") Long nsId,@RequestParam("fyId") Long fyId ) {
 		try {

@@ -54,7 +54,6 @@ export class BilanComponent implements OnInit {
   getBilan() {
     this.jrService.getBilan(this.currentNs.id, this.currentFy.id).subscribe((bilan) => {
       this.bilan = bilan;
-      console.log(bilan)
     })
   }
 

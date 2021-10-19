@@ -1,0 +1,19 @@
+
+<div class="card">
+    <div class="card-body p-0">
+      <div class="card-title header-title border-bottom p-2">
+        <h5 class=" mb-0">Liste des dettes</h5>
+        <p><i>Total dettes : <b >
+          <app-number [value]='total'></app-number></b></i></p>
+      </div>
+      <div class="dette">
+        <div *ngIf="debts.length==0">Pas de dettes ?</div>
+        <div *ngIf="debts.length!=0">
+          <div appNbcolor *ngFor="let debt of debts">
+              {{debt.account.label}} 
+              <app-number [value]='debt.solde'></app-number>
+          </div>
+      </div>
+    </div>
+  </div>
+</div> 

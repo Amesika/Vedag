@@ -55,9 +55,6 @@ export class BalanceComponent implements OnInit {
   ngOnInit() {
     this.currentNs = this.nsService.currentNs();
     this.currentFy = this.fyService.currentFy();
-
-    console.log(tableSource)
-
     this.getBalance()
     this.getRefAccount()
   }
@@ -67,8 +64,6 @@ export class BalanceComponent implements OnInit {
     this.jrService.getBalance(this.currentNs.id, this.currentFy.id).subscribe((balance) => {
       this.data = this.solde(balance);
       this.setDataTable(this.data);
-
-      console.log(this.data)
     });
   
   }
@@ -80,8 +75,6 @@ export class BalanceComponent implements OnInit {
   }
 
   handleChange(event) {
-
-    console.log(event.target.value)
     switch (event.target.value) {
       case "class":
         this.classList = ClassList

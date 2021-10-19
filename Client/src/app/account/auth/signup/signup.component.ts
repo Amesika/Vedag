@@ -45,8 +45,6 @@ export class SignupComponent implements OnInit, AfterViewInit {
     }
 
     this.loading = true;
-
-    console.log(this.signupForm.value);
     setTimeout(() => {
       this.loading = false;
       this.router.navigate(['/account/confirm']);
