@@ -1,0 +1,161 @@
+{
+	"info": {
+		"_postman_id": "d178a633-eb02-446d-bcd5-192477121515",
+		"name": "Vedag",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Debts",
+			"item": [
+				{
+					"name": "Create Debt",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 5009.0,\r\n    \"currentAmount\": 3000.0,\r\n    \"dueAmount\": 100.0,\r\n    \"rate\": 20.0,\r\n    \"startDate\": \"2021-01-01T00:00:00.000+00:00\",\r\n    \"creditor\": \"Test\",\r\n    \"account\": {\r\n        \"id\":484\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/debt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"debt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Debt",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3208,\r\n    \"amount\": 5004.0,\r\n    \"currentAmount\": 3000.0,\r\n    \"dueAmount\": 100.0,\r\n    \"rate\": 20.0,\r\n    \"startDate\": \"2021-01-01T00:00:00.000+00:00\",\r\n    \"creditor\": \"Test\",\r\n    \"account\": {\r\n        \"id\": 484\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/debt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"debt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Debt",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/debt/3207",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"debt",
+								"3207"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Debt",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/debt/3207",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"debt",
+								"3207"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Debts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/debt?id=484&sort=id&page=0&size=10&order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"debt"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "484"
+								},
+								{
+									"key": "sort",
+									"value": "id"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "order",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

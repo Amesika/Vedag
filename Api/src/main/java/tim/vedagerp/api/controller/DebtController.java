@@ -77,7 +77,9 @@ public class DebtController {
 			DebtDto debt = debtService.get(id);
 			return new ResponseEntity<>(debt, HttpStatus.OK);
 		} catch (NoSuchElementException ex) {
-			return new ResponseEntity<>(String.format("Pas de valeur pour id: %d", id), HttpStatus.OK);
+			Message res = new Message();
+			res.setText(String.format("Pas de valeur pour id: %d", id));
+			return new ResponseEntity<>(res, HttpStatus.OK);
 		}
 
 	}

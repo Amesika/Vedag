@@ -11,7 +11,7 @@
         <div *ngIf="debts.length!=0">
           <div class="row">
             <div class="col " appNbcolor *ngFor="let debt of debts">
-              <div class="block badge badge-soft-primary">
+              <div class="block badge badge-soft-primary" (click)="getDebtDetails(debt)">
                 {{debt.account.label}} <app-number [value]='debt.solde'></app-number>
               </div>
             </div>

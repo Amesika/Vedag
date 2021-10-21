@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AccountSolde } from 'src/app/core/models/account_solde';
 import { FyService } from 'src/app/core/services/vdg-service/fy.service';
 import { JournalRowService } from 'src/app/core/services/vdg-service/jr.service';
@@ -11,7 +12,7 @@ import { NsService } from 'src/app/core/services/vdg-service/ns.service';
 })
 export class DebtDashbordComponent implements OnInit {
 
-  constructor(private nsService: NsService, private fyService: FyService, private jrService: JournalRowService) { }
+  constructor(private router: Router,private nsService: NsService, private fyService: FyService, private jrService: JournalRowService) { }
 
   debts: AccountSolde[] = [];
 
@@ -33,6 +34,12 @@ export class DebtDashbordComponent implements OnInit {
     });
 
    
+  }
+
+  getDebtDetails(debt){
+    console.log(debt)
+    let debtId =  3208
+    this.router.navigate(['/', 'debt', debtId]);
   }
 
 }
