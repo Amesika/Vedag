@@ -17,6 +17,11 @@ export const MENU: MenuItem[] = [
         ]
     },
     {
+        label: 'Dêttes',
+        icon: 'trending-down',
+        link: '/debt'
+    },
+    {
         label: 'Comptabilité',
         icon: 'book',
         subItems: [

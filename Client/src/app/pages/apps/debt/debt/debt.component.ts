@@ -11,28 +11,10 @@ import { NsService } from 'src/app/core/services/vdg-service/ns.service';
 })
 export class DebtComponent implements OnInit {
 
-  constructor(private nsService: NsService, private fyService: FyService, private jrService: JournalRowService) { }
-
-  debts: AccountSolde[] = [];
-
-  total:number=0;
+  constructor() { }
 
   ngOnInit() {
-    this._fetchData();
-  }
-
-  private _fetchData() {
-
-    this.jrService.getDebt(this.nsService.currentNs().id, this.fyService.currentFy().id)
-    .subscribe((accountSoldes) => {
-      this.debts = accountSoldes;
-      this.total = 0;
-      accountSoldes.forEach(items => {
-        this.total += items.solde;
-      });
-    });
-
-   
+    
   }
 
 }

@@ -24,9 +24,9 @@ export class NbcolorDirective {
     let value: number = this.numberV;
     let style = this.elementRef.nativeElement.style;
     if (value > 0) {
-      style.color = '#2e86de'
+      style.color = '#5369f8'
     } else if (value < 0) {
-      style.color = '#ee5253'
+      style.color = '#ff5c75'
     } else {
       style.color = '#8395a7'
     }

@@ -15,13 +15,10 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { NsComponent } from './ns/ns.component';
 import { NsFormInputComponent } from './ns/ns-form-input/ns-form-input.component';
 import { WidgetModule } from 'src/app/shared/widgets/widget.module';
-import { HttpClientModule } from '@angular/common/http';
-import { TablesRoutingModule } from '../ui/tables/tables-routing.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { OfferModule } from './offer/offer.module';
 import { ComptableModule } from './comptable/comptable.module';
 import { AnalyseModule } from './analyse/analyse.module';
-
 
 @NgModule({
     declarations: [CalendarComponent,NsComponent,NsFormInputComponent ],
