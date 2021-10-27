@@ -8,9 +8,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -37,7 +35,6 @@ import tim.vedagerp.api.model.IBudgetRow;
 import tim.vedagerp.api.model.IResultatMonth;
 import tim.vedagerp.api.model.Ibalance;
 import tim.vedagerp.api.model.ResultatRow;
-import tim.vedagerp.api.model.Ledger;
 import tim.vedagerp.api.model.ResultatNsRow;
 import tim.vedagerp.api.repositories.AccountRepository;
 import tim.vedagerp.api.repositories.FiscalYearRepository;
@@ -152,7 +149,6 @@ public class JournalService {
 		for (FiscalYear fiscalYear : fys) {
 			ResultatNsRow row = new  ResultatNsRow();
 			List<IResultatMonth> rnr =  journalRowRepository.getResultatByMonth(nsId, fiscalYear.getId());
-			List<IResultatMonth> rnrprev =  journalPrevRowRepository.getResultatByMonth(nsId, fiscalYear.getId());
 			row.setFy(fiscalYear);
 			row.setResultatsSolde(rnr);
 			rows.add(row);

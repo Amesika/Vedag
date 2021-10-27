@@ -1,6 +1,6 @@
 package tim.vedagerp.api.controller;
 
-import java.util.List;
+
 import java.util.NoSuchElementException;
 
 import org.apache.logging.log4j.LogManager;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import tim.vedagerp.api.entities.DebtDto;
+import tim.vedagerp.api.entities.Debt;
 import tim.vedagerp.api.model.Message;
 import tim.vedagerp.api.services.DebtService;
 
@@ -44,15 +44,15 @@ public class DebtController {
 			@RequestParam("size") int size,
 			@RequestParam("id") Long id) {
 		logger.info("getDebt");
-		Page<DebtDto> debts = debtService.listSortOrder(sort,order,page,size,id);
+		Page<Debt> debts = debtService.listSortOrder(sort,order,page,size,id);
 		return new ResponseEntity<>(debts, HttpStatus.OK);
 	}
 	
 	@PostMapping()
-	public ResponseEntity<?> postDebt(@RequestBody DebtDto body) {
+	public ResponseEntity<?> postDebt(@RequestBody Debt body) {
 		logger.info("postDebt ");
 		try {
-			DebtDto account = debtService.add(body);
+			Debt account = debtService.add(body);
 			return new ResponseEntity<>(account, HttpStatus.OK);
 		} catch (HttpMessageNotReadableException ex) {
 			return new ResponseEntity<>("Le body n'existe pas.", HttpStatus.OK);
@@ -60,10 +60,10 @@ public class DebtController {
 	}
 
 	@PutMapping()
-	public ResponseEntity<?> putDebt(@RequestBody DebtDto body) {
+	public ResponseEntity<?> putDebt(@RequestBody Debt body) {
 		logger.info("putDebt");
 		try {
-			DebtDto account = debtService.update(body);
+			Debt account = debtService.update(body);
 			return new ResponseEntity<>(account, HttpStatus.OK);
 		} catch (HttpMessageNotReadableException ex) {
 			return new ResponseEntity<>("Le body n'existe pas.", HttpStatus.OK);
@@ -74,7 +74,7 @@ public class DebtController {
 	public ResponseEntity<?> getDebt(@PathVariable("id") long id) {
 		logger.info("getDebt");
 		try {
-			DebtDto debt = debtService.get(id);
+			Debt debt = debtService.get(id);
 			return new ResponseEntity<>(debt, HttpStatus.OK);
 		} catch (NoSuchElementException ex) {
 			Message res = new Message();

@@ -1,7 +1,6 @@
 package tim.vedagerp.api.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -35,9 +34,6 @@ import tim.vedagerp.api.model.ResultatRow;
 import tim.vedagerp.api.services.AccountService;
 import tim.vedagerp.api.services.JournalPrevService;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 @Controller
 @CrossOrigin(origins = "*")
 @RequestMapping("api/v1/journal-prev")
@@ -48,8 +44,6 @@ public class JournalPrevRowController {
 
 	@Autowired
 	AccountService accountService;
-
-	private static Logger logger = LogManager.getLogger(JournalPrevRowController.class);
 
 	@GetMapping()
 	public ResponseEntity<?> getJournal(@RequestParam("sort") String sort, @RequestParam("order") String order,

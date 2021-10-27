@@ -1,8 +1,6 @@
 package tim.vedagerp.api.model;
 import java.util.List;
 
-import tim.vedagerp.api.entities.Account;
-
 public class BudgetPart {
 	
 	private float solde;

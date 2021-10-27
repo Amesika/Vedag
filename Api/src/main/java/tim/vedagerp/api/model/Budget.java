@@ -1,7 +1,4 @@
 package tim.vedagerp.api.model;
-import java.util.List;
-
-import tim.vedagerp.api.entities.Account;
 
 public class Budget {
 	

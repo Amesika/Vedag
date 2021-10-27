@@ -1,10 +1,8 @@
 package tim.vedagerp.api.services;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -112,7 +110,6 @@ public class AccountService {
 	// Supprimer les doublons des catégories et les sauvegarder dans la bases
 	private List<Category> delDoublon(List<Account> body) {
 
-		Set<Category> set = new HashSet<Category>();
 		List<Category> categoriesInit = new ArrayList<Category>();
 		List<Category> categoriesFinal = new ArrayList<Category>();
 		Boolean catExist;
