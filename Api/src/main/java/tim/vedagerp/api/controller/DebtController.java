@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tim.vedagerp.api.entities.Debt;
+import tim.vedagerp.api.model.DebtDTO;
 import tim.vedagerp.api.model.Message;
 import tim.vedagerp.api.services.DebtService;
 
@@ -47,24 +48,13 @@ public class DebtController {
 		Page<Debt> debts = debtService.listSortOrder(sort,order,page,size,id);
 		return new ResponseEntity<>(debts, HttpStatus.OK);
 	}
-	
-	@PostMapping()
-	public ResponseEntity<?> postDebt(@RequestBody Debt body) {
-		logger.info("postDebt ");
-		try {
-			Debt account = null; //debtService.add(body);
-			return new ResponseEntity<>(account, HttpStatus.OK);
-		} catch (HttpMessageNotReadableException ex) {
-			return new ResponseEntity<>("Le body n'existe pas.", HttpStatus.OK);
-		}
-	}
 
 	@PutMapping()
 	public ResponseEntity<?> putDebt(@RequestBody Debt body) {
 		logger.info("putDebt");
 		try {
-			Debt account = debtService.update(body);
-			return new ResponseEntity<>(account, HttpStatus.OK);
+			DebtDTO debt = debtService.update(body);
+			return new ResponseEntity<>(debt, HttpStatus.OK);
 		} catch (HttpMessageNotReadableException ex) {
 			return new ResponseEntity<>("Le body n'existe pas.", HttpStatus.OK);
 		}

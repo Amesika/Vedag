@@ -25,6 +25,7 @@ import tim.vedagerp.api.repositories.DebtRepository;
 import tim.vedagerp.api.repositories.JournalRowRepository;
 import tim.vedagerp.api.repositories.NameSpaceRepository;
 import tim.vedagerp.api.services.AccountService;
+import tim.vedagerp.api.services.DebtService;
 import tim.vedagerp.api.services.JournalService;
 import tim.vedagerp.api.services.NameSpaceService;
 
@@ -58,6 +59,11 @@ public class DebtTest {
     @Autowired
     AccountService accountService;
 
+    @Autowired
+    DebtService debtService;
+
+    SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
+
     @Test
     public void givenDebtMappingToDebtDTO_whenMaps_thenCorrect() throws ParseException {
 
@@ -87,7 +93,7 @@ public class DebtTest {
 
     @Test
     public void givenDebtDTOMappingToDebt_whenMaps_thenCorrect() throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
+        
         DebtDTO dto = new DebtDTO();
         dto.setId(10L);
         dto.setName("Nom");
@@ -232,5 +238,61 @@ public class DebtTest {
 
         assertEquals(9700, debtRepository.findByAccountId(ac1.getId()).getCurrentAmount(), 0);
         assertEquals(-8400, debtRepository.findByAccountId(ac2.getId()).getCurrentAmount(), 0);
+    }
+
+
+    @Test
+    public void updateDebt() throws ParseException{
+
+        journalRowRepository.deleteAll();
+        debtRepository.deleteAll();
+        accountRepository.deleteAll();
+
+        NameSpace ns = new NameSpace();
+        if (nameSpaceRepository.existsByName("Ns test name")) {
+            ns = nameSpaceRepository.findByName("Ns test name");
+        } else {
+            ns.setDescription("Ns test description");
+            ns.setName("Ns test name");
+            ns = nameSpaceRepository.saveAndFlush(ns);
+        }
+
+        Account ac1 = new Account();
+        ac1.setNamespace(ns);
+        ac1.setLabel("Account 1 test label to update debt");
+        ac1.setLabelBilan("Account 1 test labelBilan to update debt");
+        ac1.setNumber("1640-xxx1Udebt");
+        ac1 = accountService.add(ac1);
+
+        // Cration de la dêtte
+        Debt debtExpected = new Debt();
+        debtExpected.setAccount(ac1);
+        debtExpected.setCurrentAmount(15000);
+        debtExpected.setCreditor("Test");
+        debtExpected.setStartDate(format.parse("29-10-2021 11:30:00"));
+        debtExpected.setNamespace(ns);
+        debtExpected = debtRepository.saveAndFlush(debtExpected);
+
+        // Modification de la dêtte
+        debtExpected.setAmount(20000);
+        debtExpected.setCurrentAmount(5000);
+        debtExpected.setName("Test debt");
+        debtExpected.setDescription("Test debt description");
+        debtExpected.setCreditor("Test update");
+        debtExpected.setStartDate(format.parse("29-10-2021 11:35:00"));
+        debtExpected.setRate(8);
+
+        DebtDTO debtDto = new DebtDTO();
+        debtDto = debtService.update(debtExpected);
+        
+        // Test
+        assertEquals(debtExpected.getAmount(), debtDto.getAmount(),0);
+        assertEquals(debtExpected.getCurrentAmount(), debtDto.getCurrentAmount(),0);
+        assertEquals(debtExpected.getRate(), debtDto.getRate(),0);
+        assertEquals(debtExpected.getName(), debtDto.getName());
+        assertEquals(debtExpected.getCreditor(), debtDto.getCreditor());
+        assertEquals(debtExpected.getDescription(), debtDto.getDescription());
+        assertEquals(debtExpected.getStartDate().toString(), format.parse(debtDto.getStartDate()).toString());
+
     }
 }

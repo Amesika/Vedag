@@ -70,8 +70,10 @@ public class DebtService {
 	}
 
 	// Modifier une dêtte
-	public Debt update(Debt body) {
-		return debtRepository.saveAndFlush(body);
+	public DebtDTO update(Debt body) {
+		DebtDTO debtDto = null;
+		debtDto = debtMapper.toDebtDTO(debtRepository.saveAndFlush(body));
+		return debtDto;
 	}
 
 	// Supprimer une dêtte
