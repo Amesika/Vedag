@@ -28,6 +28,9 @@ public class AccountService {
 	@Autowired
 	CategoryRepository categoryRepository;
 
+	@Autowired
+	DebtService debtService;
+
 	private static Logger logger = LogManager.getLogger(AccountService.class);
 
 	// Liste des comptes
@@ -63,18 +66,22 @@ public class AccountService {
 		return accountRepository.findAll();
 	}
 
-	// Ajouter une écriture comptable
+	// Ajouter un compte comptable
 	public Account get(long id) throws NoSuchElementException {
 		return accountRepository.findById(id).get();
 	}
 
-	// Ajouter une écriture comptable
+	// Ajouter un compte comptable
 	public Account add(Account body) {
 		logger.info(body);
-		return accountRepository.save(body);
+		Account account = null;
+		// creation d'une dette
+		account = accountRepository.saveAndFlush(body);
+		debtService.add(account);
+		return account;
 	}
 
-	// Ajouter une écriture comptable
+	// Ajouter un compte comptable
 	public List<Account> addAll(List<Account> body) {
 		
 		List<Category> categories = this.delDoublon(body);
@@ -96,12 +103,12 @@ public class AccountService {
 		//return new ArrayList<Account>();
 	}
 
-	// Modifier une écriture comptable
+	// Modifier un compte comptable
 	public Account update(Account body) {
 		return accountRepository.save(body);
 	}
 
-	// Supprimer une écriture comptable
+	// Supprimer un compte comptable
 	public String delete(long id) throws EmptyResultDataAccessException {
 		accountRepository.deleteById(id);
 		return "Success";

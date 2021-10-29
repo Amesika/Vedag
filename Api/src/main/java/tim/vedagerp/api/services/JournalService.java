@@ -65,6 +65,9 @@ public class JournalService {
 	@Autowired
 	NameSpaceService nameSpaceService;
 
+	@Autowired
+	DebtService debtService;
+
 	private static Logger logger = LogManager.getLogger(JournalService.class);
 
 	// Le journal
@@ -103,12 +106,18 @@ public class JournalService {
 
 	// Ajouter une écriture comptable
 	public JournalRow add(JournalRow body) {
-		return journalRowRepository.saveAndFlush(body);
+		JournalRow journalRow = null;
+		journalRow = journalRowRepository.saveAndFlush(body);
+		debtService.calculDebtSolde(journalRow);
+		return journalRow;
 	}
 
 	// Modifier une écriture comptable
 	public JournalRow update(JournalRow body) {
-		return journalRowRepository.saveAndFlush(body);
+		JournalRow journalRow = null;
+		journalRow = journalRowRepository.saveAndFlush(body);
+		debtService.calculDebtSolde(journalRow);
+		return journalRow;
 	}
 
 	// Supprimer une écriture comptable
@@ -225,8 +234,6 @@ public class JournalService {
 
 		return getRSolde(nsId, start, end,accountsCharges,accountsProduits);
 	}
-
-	
 
 	public ResultatRow getRSolde(Long nsId, Date start, Date end,List<Account> accountsCharges,List<Account> accountsProduits){
 
@@ -431,10 +438,7 @@ public class JournalService {
 		return accountSoldes;
 	}
 
-	/**
-	 * Solde d'un sous comptes comptable
-	 * 
-	 */
+	//Solde d'un sous comptes comptable
 	public float getSoldeByNsidSd(Long nsId, Date start, Date end, Long subAccountId) {
 		float solde = 0;
 		float soldeCredit = 0;
@@ -458,7 +462,6 @@ public class JournalService {
 		return this.roundFloat(solde, 2);
 	}
 
-
 	public float getSoldeByNsidFyid(Long nsId, Date start, Date end, Long subAccountId) {
 		float solde = 0;
 		float soldeCredit = 0;
@@ -481,7 +484,6 @@ public class JournalService {
 
 		return this.roundFloat(solde, 2);
 	}
-
 
 	public float getSoldeByNsidFyid(Long nsId,Long fyId, Long subAccountId) {
 		

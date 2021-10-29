@@ -9,16 +9,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "debts")
 @Setter
 @Getter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Debt {
 
 	@Id
@@ -49,6 +56,10 @@ public class Debt {
 	@OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
+
+	@ManyToOne
+    @JoinColumn(name="namespace_id")
+	private NameSpace namespace;
 
 	
 }

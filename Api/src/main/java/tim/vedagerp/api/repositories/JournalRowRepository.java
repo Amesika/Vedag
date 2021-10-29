@@ -180,8 +180,7 @@ public interface JournalRowRepository extends JpaRepository<JournalRow, Long> {
 	+"GROUP BY  month,vju.namespace_id,accounts.id", nativeQuery = true)
 	List<IBudgetRow> getBudgetProduits(@Param("nsId") Long nsId,@Param("fyId") Long fyId, @Param("start") Date start, @Param("end") Date end);
 
-
-
+    JournalRow findByLabel(String string);
 
 
 }

@@ -20,18 +20,32 @@
 	<profiles>
 		<profile>
 			<id>dev</id>
-			<activation>
+
+			<properties>
+				<spring.profiles.active>dev</spring.profiles.active>
+				<maven.test.skip>true</maven.test.skip>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>test</id>			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<spring.profiles.active>dev</spring.profiles.active>
+				<spring.profiles.active>test</spring.profiles.active>
 			</properties>
 		</profile>
+		
 		<profile>
 			<id>prod</id>
 			<properties>
 				<spring.profiles.active>prod</spring.profiles.active>
 			</properties>
+			<activation>
+				<property>
+					<name>prod</name>
+				</property>
+			</activation>
 		</profile>
 	</profiles>
 	<dependencies>
@@ -101,8 +115,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5.1</version>
 				<configuration>
-					<source>1.11</source>
-					<target>1.11</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.mapstruct</groupId>

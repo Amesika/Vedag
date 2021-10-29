@@ -29,6 +29,7 @@ public abstract class DebtMapper {
         debtDto.setStartDate(simpleDateFormat.format(debt.getStartDate()));
         debtDto.setRate(debt.getRate());
         debtDto.setAccount(debt.getAccount());
+        debtDto.setNamespace(debt.getNamespace());
         return debtDto;
     }
 
@@ -45,6 +46,7 @@ public abstract class DebtMapper {
         debt.setStartDate(simpleDateFormat.parse(debtDto.getStartDate()));
         debt.setRate(debtDto.getRate());
         debt.setAccount(debtDto.getAccount());
+        debt.setNamespace(debtDto.getNamespace());
         return debt;
     }
 

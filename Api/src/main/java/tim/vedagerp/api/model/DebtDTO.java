@@ -2,12 +2,20 @@ package tim.vedagerp.api.model;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import tim.vedagerp.api.entities.Account;
+import tim.vedagerp.api.entities.NameSpace;
+
 
 @Setter
 @Getter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class DebtDTO {
 
 	private Long id;
@@ -53,7 +61,8 @@ public class DebtDTO {
 
 	/** Date de fin */
 	private String endDate;
-	
 
+	/** Définition de l'espace de travail */
+	private NameSpace namespace;
 	
 }

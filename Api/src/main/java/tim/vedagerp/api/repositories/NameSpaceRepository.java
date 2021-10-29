@@ -9,4 +9,9 @@ import tim.vedagerp.api.entities.NameSpace;
 public interface NameSpaceRepository extends JpaRepository<NameSpace, Long> {
 
     Page<NameSpace> findAllByNameContainsOrDescriptionContains(String name,String description, Pageable pageable);
+
+    boolean existsByName(String string);
+
+    NameSpace findByName(String string);
+    
 }

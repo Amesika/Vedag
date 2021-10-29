@@ -52,7 +52,7 @@ public class DebtController {
 	public ResponseEntity<?> postDebt(@RequestBody Debt body) {
 		logger.info("postDebt ");
 		try {
-			Debt account = debtService.add(body);
+			Debt account = null; //debtService.add(body);
 			return new ResponseEntity<>(account, HttpStatus.OK);
 		} catch (HttpMessageNotReadableException ex) {
 			return new ResponseEntity<>("Le body n'existe pas.", HttpStatus.OK);
