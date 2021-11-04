@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.ForeignKey;
 
 @Entity
 @Table(name = "journalprev")
@@ -20,15 +21,15 @@ public class JournalPrevRow {
 	private Date dateOperation;
 	private	String	label;
 	@ManyToOne
-    @JoinColumn(name="debit_id")
+    @JoinColumn(name="debit_id",foreignKey=@ForeignKey(name="FK_JOURNALPREV_DEBIT"))
 	private Account debit;
 	
 	@ManyToOne
-    @JoinColumn(name="credit_id")
+    @JoinColumn(name="credit_id",foreignKey=@ForeignKey(name="FK_JOURNALPREV_CREDIT"))
 	private Account credit;
 	
 	@ManyToOne
-    @JoinColumn(name="namespace_id")
+    @JoinColumn(name="namespace_id",foreignKey=@ForeignKey(name="FK_JOURNALPREV_NS"))
 	private NameSpace namespace;
 	
 	private float amount;

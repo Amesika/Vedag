@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.ForeignKey;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -53,12 +54,12 @@ public class Debt {
 	@Column()
 	private String creditor;
 
-	@OneToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id", referencedColumnName = "id",foreignKey=@ForeignKey(name="FK_DEBT_ACCOUNT"))
     private Account account;
 
 	@ManyToOne
-    @JoinColumn(name="namespace_id")
+    @JoinColumn(name="namespace_id",foreignKey=@ForeignKey(name="FK_DEBT_NS"))
 	private NameSpace namespace;
 
 	

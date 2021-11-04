@@ -10,8 +10,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.persistence.ForeignKey;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 
 @Entity
 @Table(
@@ -20,6 +28,11 @@ uniqueConstraints=
 @UniqueConstraint(columnNames={
 	"label", "number","namespace_id"
 }))
+@Setter
+@Getter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Account {
 
 	@Id
@@ -36,7 +49,7 @@ public class Account {
 	private	String	number;
 	
 	@ManyToOne()
-    @JoinColumn(name="category_id")
+    @JoinColumn(name="category_id",foreignKey=@ForeignKey(name="FK_ACCOUNT_CATEGORY"))
 	private	Category category;
 	
 	@OneToMany(mappedBy = "debit")
@@ -46,66 +59,10 @@ public class Account {
     private List<JournalRow> journalCredit;
 	
 	@ManyToOne
-    @JoinColumn(name="namespace_id")
+    @JoinColumn(name="namespace_id",foreignKey=@ForeignKey(name="FK_ACCOUNT_NS"))
 	private NameSpace namespace;
 	
 	@ManyToOne()
-    @JoinColumn(name="account_id")
+    @JoinColumn(name="account_id",foreignKey=@ForeignKey(name="FK_ACCOUNT_ACCOUNT"))
 	private	Account account;
-	
-	public Account getAccount() {
-		return account;
-	}
-	public String getLabelBilan() {
-		return labelBilan;
-	}
-	public void setLabelBilan(String labelBilan) {
-		this.labelBilan = labelBilan;
-	}
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getLabel() {
-		return label;
-	}
-	public void setLabel(String label) {
-		this.label = label;
-	}
-	public String getNumber() {
-		return number;
-	}
-	public void setNumber(String number) {
-		this.number = number;
-	}
-		
-	public Category getCategory() {
-		return category;
-	}
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-	
-	
-	public NameSpace getNamespace() {
-		return namespace;
-	}
-	public void setNamespace(NameSpace namespace) {
-		this.namespace = namespace;
-	}
-	@Override
-	public String toString() {
-		return "Account [category=" + category + ", id=" + id + ", journalCredit=" + journalCredit + ", journalDebit="
-				+ journalDebit + ", label=" + label + ", labelBilan=" + labelBilan + ", namespace=" + namespace
-				+ ", number=" + number + "]";
-	}
-
-	
-	
-	
 }

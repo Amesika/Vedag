@@ -93,7 +93,7 @@ public class DebtTest {
 
     @Test
     public void givenDebtDTOMappingToDebt_whenMaps_thenCorrect() throws ParseException {
-        
+
         DebtDTO dto = new DebtDTO();
         dto.setId(10L);
         dto.setName("Nom");
@@ -234,15 +234,13 @@ public class DebtTest {
 
         journalService.add(journalRow3);
         journalService.update(journalRow);
-        
 
         assertEquals(9700, debtRepository.findByAccountId(ac1.getId()).getCurrentAmount(), 0);
         assertEquals(-8400, debtRepository.findByAccountId(ac2.getId()).getCurrentAmount(), 0);
     }
 
-
     @Test
-    public void updateDebt() throws ParseException{
+    public void updateDebt() throws ParseException {
 
         journalRowRepository.deleteAll();
         debtRepository.deleteAll();
@@ -284,15 +282,35 @@ public class DebtTest {
 
         DebtDTO debtDto = new DebtDTO();
         debtDto = debtService.update(debtExpected);
-        
+
         // Test
-        assertEquals(debtExpected.getAmount(), debtDto.getAmount(),0);
-        assertEquals(debtExpected.getCurrentAmount(), debtDto.getCurrentAmount(),0);
-        assertEquals(debtExpected.getRate(), debtDto.getRate(),0);
+        assertEquals(debtExpected.getAmount(), debtDto.getAmount(), 0);
+        assertEquals(debtExpected.getCurrentAmount(), debtDto.getCurrentAmount(), 0);
+        assertEquals(debtExpected.getRate(), debtDto.getRate(), 0);
         assertEquals(debtExpected.getName(), debtDto.getName());
         assertEquals(debtExpected.getCreditor(), debtDto.getCreditor());
         assertEquals(debtExpected.getDescription(), debtDto.getDescription());
         assertEquals(debtExpected.getStartDate().toString(), format.parse(debtDto.getStartDate()).toString());
 
+    }
+
+    @Test
+    public void deleteDebt() throws Exception {
+
+        // Création de la dêtte
+        this.addNewDebt_whenAccount_isCreate();
+
+        Account ac1 = accountRepository.findByLabel("Account 1 test label");
+        Account ac2 = accountRepository.findByLabel("Account 2 test label");
+
+        // Suppression de la dêtte
+        journalRowRepository.deleteAll();
+        accountService.delete(ac1.getId());
+        /*
+         * accountService.delete(ac2.getId());
+         * 
+         * assertTrue(accountRepository.existsById(ac1.getId()));
+         * assertTrue(accountRepository.existsById(ac2.getId()));
+         */
     }
 }

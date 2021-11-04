@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.persistence.ForeignKey;
 
 @Entity
 @Table(name = "category", uniqueConstraints = @UniqueConstraint(columnNames = { "prime", "second" }))
@@ -25,7 +26,7 @@ public class Category {
 	private String second;
 	
 	@ManyToOne
-    @JoinColumn(name="namespace_id")
+    @JoinColumn(name="namespace_id",foreignKey=@ForeignKey(name="FK_CATEGORY_NS"))
 	private NameSpace namespace;
 	
 	public NameSpace getNamespace() {
