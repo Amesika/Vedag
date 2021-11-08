@@ -12,21 +12,33 @@ services:
     volumes:
       - db-data:/var/lib/postgresql
     networks:
+      - backend 
+
+  vdg_db_test:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: c0S6nnPQcFds8SBJcutE
+      POSTGRES_USER: vdg_test
+      POSTGRES_DB: vdg.db.test
+    ports:
+      - 7001:5432
+    volumes:
+      - db-data-test:/var/lib/postgresql
+    networks:
       - backend  
       
-  vdg_api:
-    depends_on:
-      - vdg_db
-    image: vedag_api
-    ports: 
-      - 9000:8080
-    networks:
-      - backend
-      - frontend
+  # vdg_api:
+  #   depends_on:
+  #     - vdg_db
+  #   image: vedag_api
+  #   ports: 
+  #     - 9000:8080
+  #   networks:
+  #     - backend
+  #     - frontend
 
   vdg_client:
-    depends_on:
-      - vdg_api
     image: vedag_client
     ports: 
       - 8000:80
@@ -35,6 +47,7 @@ services:
 
 volumes:
   db-data:
+  db-data-test:
 
 networks:
   backend:
