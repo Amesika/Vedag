@@ -15,6 +15,7 @@ import { UiModule } from './ui/ui.module';
 import { AppsModule } from './apps/apps.module';
 import { OtherModule } from './other/other.module';
 import { ComptableModule } from './apps/comptable/comptable.module';
+import { DetteModule } from './apps/debt/debt.module';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ComptableModule } from './apps/comptable/comptable.module';
     PagesRoutingModule,
     UiModule,
     AppsModule,
-    OtherModule
+    OtherModule,
+    DetteModule
   ]
 })
 export class PagesModule { }

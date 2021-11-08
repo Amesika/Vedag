@@ -10,13 +10,7 @@ import { FormSubaccountComponent } from './compte/form-subaccount/form-subaccoun
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FiscalYearComponent } from './fiscal-year/fiscal-year.component';
 import { FormFyComponent } from './fiscal-year/form-fy/form-fy.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { ArchwizardModule } from 'angular-archwizard';
 import { FlatpickrModule } from 'angularx-flatpickr';
-import { ColorPickerModule } from 'ngx-color-picker';
-import { DropzoneModule } from 'ngx-dropzone-wrapper';
-import { NgxMaskModule } from 'ngx-mask';
-import { FormRoutingModule } from '../../ui/form/form-routing.module';
 import { JournalComponent } from './journal/journal.component';
 import { FormJournalRowComponent } from './journal/form-journal-row/form-journal-row.component';
 import { LedgerComponent } from './ledger/ledger.component';
@@ -24,7 +18,6 @@ import { BilanComponent } from './bilan/bilan.component';
 import { BalanceComponent } from './balance/balance.component';
 import { ResultatComponent } from './resultat/resultat.component';
 import { GraphiqueComponent } from './graphique/graphique.component';
-import { DebtComponent } from './debt/debt.component';
 
 @NgModule({
   declarations: [
@@ -39,10 +32,8 @@ import { DebtComponent } from './debt/debt.component';
     BilanComponent,
     BalanceComponent,
     ResultatComponent,
-    GraphiqueComponent,
-    DebtComponent
+    GraphiqueComponent
   ],
-  exports:[DebtComponent],
   imports: [
     CommonModule,
     ComptableRoutingModule,
