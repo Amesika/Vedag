@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import tim.vedagerp.api.entities.Account;
 import tim.vedagerp.api.entities.Category;
+import tim.vedagerp.api.entities.Debt;
 import tim.vedagerp.api.repositories.AccountRepository;
 import tim.vedagerp.api.repositories.CategoryRepository;
 
@@ -29,6 +30,9 @@ public class AccountService {
 	
 	@Autowired
 	CategoryRepository categoryRepository;
+
+	@Autowired
+	DebtService debtService;
 
 	private static Logger logger = LogManager.getLogger(AccountService.class);
 
@@ -73,7 +77,17 @@ public class AccountService {
 	// Ajouter une écriture comptable
 	public Account add(Account body) {
 		logger.info(body);
-		return accountRepository.save(body);
+		Account account = null;
+		
+		// creation d'une dette si il n'existe pas
+		if(body.getDebt()==null){
+			Debt debt = debtService.add(body);
+			body.setDebt(debt);
+		}
+	
+		account = accountRepository.saveAndFlush(body);
+
+		return account;
 	}
 
 	// Ajouter une écriture comptable

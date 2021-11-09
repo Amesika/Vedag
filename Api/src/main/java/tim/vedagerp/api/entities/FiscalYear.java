@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.ForeignKey;
 
 @Entity
 @Table(name = "fiscalyear")
@@ -29,7 +30,7 @@ public class FiscalYear {
 	private Date endDate;
 
 	@ManyToOne
-	@JoinColumn(name = "namespace_id")
+	@JoinColumn(name = "namespace_id",foreignKey=@ForeignKey(name="FK_FY_NS"))
 	private NameSpace namespace;
 
 	public Long getId() {

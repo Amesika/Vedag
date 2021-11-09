@@ -68,6 +68,9 @@ public class JournalService {
 	@Autowired
 	NameSpaceService nameSpaceService;
 
+	@Autowired
+	DebtService debtService;
+
 	private static Logger logger = LogManager.getLogger(JournalService.class);
 
 	// Le journal
@@ -106,12 +109,18 @@ public class JournalService {
 
 	// Ajouter une écriture comptable
 	public JournalRow add(JournalRow body) {
-		return journalRowRepository.saveAndFlush(body);
+		JournalRow journalRow = null;
+		journalRow = journalRowRepository.saveAndFlush(body);
+		debtService.calculDebtSolde(journalRow);
+		return journalRow;
 	}
 
 	// Modifier une écriture comptable
 	public JournalRow update(JournalRow body) {
-		return journalRowRepository.saveAndFlush(body);
+		JournalRow journalRow = null;
+		journalRow = journalRowRepository.saveAndFlush(body);
+		debtService.calculDebtSolde(journalRow);
+		return journalRow;
 	}
 
 	// Supprimer une écriture comptable

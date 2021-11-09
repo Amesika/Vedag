@@ -54,4 +54,6 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
 	List<Account> findAllByNamespaceIdAndLabelBilanStartsWithAndAccountIsNotNullOrderByNumber(Long id,String number);
 
+    Account findByLabel(String string);
+
 }

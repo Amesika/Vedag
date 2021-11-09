@@ -2,6 +2,7 @@ package tim.vedagerp.api.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.ForeignKey;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -35,7 +39,7 @@ public class Account {
 	private	String	number;
 	
 	@ManyToOne()
-    @JoinColumn(name="category_id")
+    @JoinColumn(name="category_id",foreignKey=@ForeignKey(name="FK_ACCOUNT_CATEGORY"))
 	private	Category category;
 	
 	@OneToMany(mappedBy = "debit")
@@ -45,16 +49,29 @@ public class Account {
     private List<JournalRow> journalCredit;
 	
 	@ManyToOne
-    @JoinColumn(name="namespace_id")
+    @JoinColumn(name="namespace_id",foreignKey=@ForeignKey(name="FK_ACCOUNT_NS"))
 	private NameSpace namespace;
 	
 	@ManyToOne()
-    @JoinColumn(name="account_id")
+    @JoinColumn(name="account_id",foreignKey=@ForeignKey(name="FK_ACCOUNT_ACCOUNT"))
 	private	Account account;
+
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "debt_id", referencedColumnName = "id")
+    private Debt debt;
 	
 	public Account getAccount() {
 		return account;
 	}
+
+	public Debt getDebt() {
+		return debt;
+	}
+
+	public void setDebt(Debt debt) {
+		this.debt = debt;
+	}
+
 	public String getLabelBilan() {
 		return labelBilan;
 	}
