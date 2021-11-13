@@ -59,8 +59,4 @@ public class Debt {
 	@JoinColumn(name = "namespace_id", foreignKey = @ForeignKey(name = "FK_DEBT_NS"))
 	private NameSpace namespace;
 
-	@OneToOne(mappedBy = "debt",cascade = CascadeType.ALL)
-	private Account account;
-
-
 }

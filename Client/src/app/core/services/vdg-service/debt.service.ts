@@ -8,6 +8,7 @@ import { TableState } from 'src/app/shared/widgets/table-advanced/table-advanced
 import { Ns } from 'src/app/pages/apps/ns/models/ns';
 import { CookieService } from './cookie.service';
 import { environment } from 'src/environments/environment';
+import { Debt } from '../../models/debt';
 
 
 @Injectable({
@@ -16,6 +17,7 @@ import { environment } from 'src/environments/environment';
 
 export class DebtService {
 
+
     href = environment.base_url;
     apiUrl = '/api/v1/debt'
 
@@ -23,9 +25,29 @@ export class DebtService {
     }
 
     //Récuperer une dêtte
-    get(id: number) {
+    getOneDebt(id: number) {
         const requestUrl = `${this.href}${this.apiUrl}/${id}`;
         return this._http.get<any>(requestUrl)
     }
+
+    //Récuperer une dêtte
+    getDebt(nsId: number) {
+        const requestUrl = `${this.href}${this.apiUrl}?nsId=${nsId}`;
+        return this._http.get<any>(requestUrl)
+    }
+
+    // Mise à jour des soldes
+    reloadDebt(nsId:number): Observable<any> {
+        const requestUrl = `${this.href}${this.apiUrl}/reload?nsId=${nsId}`
+        console.log(requestUrl);
+        return this._http.get<any>(requestUrl);
+    }
+
+    // Modification d'une dette
+    putDebt(debt: Debt) : Observable<Debt> {
+        const requestUrl = `${this.href}${this.apiUrl}`
+        return this._http.put<Debt>(requestUrl,debt);
+    }
+  
 
 }

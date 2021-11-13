@@ -9,17 +9,23 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { DebtComponent } from './debt/debt.component';
 import { DebtDashbordComponent } from './debt-dashbord/debt-dashbord.component';
 import { DebtDetailComponent } from './debt-detail/debt-detail.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { FormDebtComponent } from './form-debt/form-debt.component';
 
 @NgModule({
   declarations: [
     DebtComponent,
     DebtDashbordComponent,
-    DebtDetailComponent
+    DebtDetailComponent,
+    FormDebtComponent
   ],
   exports:[DebtComponent,DebtDashbordComponent],
   imports: [
     CommonModule,
     ComptableRoutingModule,
+    NgbDropdownModule,
+    NgApexchartsModule,
     UIModule,
     WidgetModule,
     FormsModule,

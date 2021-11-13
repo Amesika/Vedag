@@ -239,8 +239,6 @@ public class JournalService {
 		return getRSolde(nsId, start, end,accountsCharges,accountsProduits);
 	}
 
-	
-
 	public ResultatRow getRSolde(Long nsId, Date start, Date end,List<Account> accountsCharges,List<Account> accountsProduits){
 
 		float soldeCharges = 0;
@@ -471,7 +469,6 @@ public class JournalService {
 		return this.roundFloat(solde, 2);
 	}
 
-
 	public float getSoldeByNsidFyid(Long nsId, Date start, Date end, Long subAccountId) {
 		float solde = 0;
 		float soldeCredit = 0;
@@ -494,7 +491,6 @@ public class JournalService {
 
 		return this.roundFloat(solde, 2);
 	}
-
 
 	public float getSoldeByNsidFyid(Long nsId,Long fyId, Long subAccountId) {
 		
@@ -520,7 +516,6 @@ public class JournalService {
 		
 		return getSoldeByNsidFyid(nsId,start,end, subAccountId);
 	}
-
 
 	public List<IBudgetRow> getBudgetProduitsList(Long nsId, Long fyId,String startstr, String endstr){
 

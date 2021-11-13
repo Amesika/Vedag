@@ -1,6 +1,7 @@
 package tim.vedagerp.api.controller;
 
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.apache.logging.log4j.LogManager;
@@ -38,14 +39,9 @@ public class DebtController {
 	private static Logger logger = LogManager.getLogger(DebtController.class);
 
 	@GetMapping()
-	public ResponseEntity<?> getDebt(
-			@RequestParam("sort") String sort,
-			@RequestParam("order") String order,
-			@RequestParam("page") int page,
-			@RequestParam("size") int size,
-			@RequestParam("id") Long id) {
+	public ResponseEntity<?> getDebt(@RequestParam("nsId") Long nsId) {
 		logger.info("getDebt");
-		Page<Debt> debts = debtService.listSortOrder(sort,order,page,size,id);
+		List<Debt> debts = debtService.list(nsId);
 		return new ResponseEntity<>(debts, HttpStatus.OK);
 	}
 
@@ -74,16 +70,17 @@ public class DebtController {
 
 	}
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delDebt(@PathVariable("id") long id) {
-		logger.info("delDebt");
-
+	@GetMapping("/reload")
+	public ResponseEntity<?> getReloadDebt(@RequestParam("nsId") long nsId) {
+		logger.info("getReloadDebt");
 		try {
 			Message res = new Message();
-			res.setText(debtService.delete(id));
+			res.setText(debtService.reloadDebt(nsId));
 			return new ResponseEntity<>(res, HttpStatus.OK);
-		} catch (EmptyResultDataAccessException ex) {
-			return new ResponseEntity<>(String.format("Id %d n'existe pas.", id), HttpStatus.OK);
+		} catch (NoSuchElementException ex) {
+			Message res = new Message();
+			res.setText(String.format("Pas de valeur pour id: %d", nsId));
+			return new ResponseEntity<>(res, HttpStatus.OK);
 		}
 
 	}

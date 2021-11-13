@@ -157,7 +157,6 @@ public class AccountService {
 		
 		categoriesFinal = categoryRepository.findAll();
 		return categoriesFinal;
-
 	}
 
 	/**
@@ -177,7 +176,6 @@ public class AccountService {
 	public List<Account> listSub(long id) {
 		return accountRepository.findAllByNamespaceIdAndAccountIsNotNullOrderByNumber(id);
     }
-
 
 	/**
 	 * Récuperation de tous les sous comptes débutant par

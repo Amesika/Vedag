@@ -1,4 +1,5 @@
 export class Ns {
+	
 
     id: number;
     name: string;
@@ -7,5 +8,11 @@ export class Ns {
     constructor(){
         
     }
+
+    setProperies(namespace: any) {
+		this.id = namespace.id;
+        this.name = namespace.name;
+        this.description = namespace.description;
+	}
 
 }

@@ -1,6 +1,8 @@
 package tim.vedagerp.api.services;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.mapstruct.factory.Mappers;
@@ -18,6 +20,7 @@ import tim.vedagerp.api.entities.JournalRow;
 import tim.vedagerp.api.helper.DateFormer;
 import tim.vedagerp.api.mapper.DebtMapper;
 import tim.vedagerp.api.model.DebtDTO;
+import tim.vedagerp.api.repositories.AccountRepository;
 import tim.vedagerp.api.repositories.DebtRepository;
 
 @Service
@@ -29,14 +32,14 @@ public class DebtService {
 	@Autowired
 	JournalService journalService;
 
+	@Autowired
+	AccountRepository accountRepository;
+
 	DebtMapper debtMapper = Mappers.getMapper(DebtMapper.class);
 
 	// Liste des dêttes
-	public Page<Debt> listSortOrder(String sort, String order, int page, int size, Long id) {
-		Pageable pageable = null;
-		pageable = PageRequest.of(page, size, Sort.by(sort).ascending());
-
-		return debtRepository.findAll(pageable);
+	public List<Debt> list(Long nsId) {
+		return debtRepository.getDebts(nsId);
 	}
 
 	// Récupérer une dêtte
@@ -55,15 +58,15 @@ public class DebtService {
 
 			debt = new Debt();
 
-			debt.setName(account.getNumber());
-			//debt.setAccount(account);
+			debt.setName(account.getNumber() + " " + account.getLabel());
+			// debt.setAccount(account);
 			debt.setNamespace(account.getNamespace());
 			debt.setStartDate(new Date());
 
 		} else {
 			return debt;
 		}
-		//debt = debtRepository.saveAndFlush(debt);
+		// debt = debtRepository.saveAndFlush(debt);
 
 		return debt;
 	}
@@ -75,28 +78,37 @@ public class DebtService {
 		return debt;
 	}
 
-	// Supprimer une dêtte
-	public String delete(long id) throws EmptyResultDataAccessException {
-		debtRepository.deleteById(id);
-		return "Success";
-	}
-
 	// Calcule du solde
 	public void calculDebtSolde(Account account) {
 
-		Debt debt = debtRepository.findById(account.getDebt().getId()).get();
+		Debt debt = null;
 
-		if(debt==null){
-			return ;
+		if (account.getDebt() == null) {
+			debt = this.add(account);
+			account.setDebt(debt);
+			accountRepository.save(account);
+
+		}
+
+		debt = debtRepository.findById(account.getDebt().getId()).get();
+
+		if (debt == null) {
+			return;
 		}
 
 		Date start = DateFormer.getStartDateOfYear();
 		Date end = DateFormer.getEndDateOfYear();
 
 		// Solde du compte
-		float amount = this.journalService.getSoldeByNsidSd(account.getNamespace().getId(), start, end, account.getId());
-		debt.setCurrentAmount(amount);
-		
+		float amount = this.journalService.getSoldeByNsidSd(account.getNamespace().getId(), start, end,
+				account.getId());
+
+		if (debt.getName().startsWith("1640")) {
+			debt.setCurrentAmount(amount*(-1));
+		} else {
+			debt.setCurrentAmount(amount);
+		}
+
 		debtRepository.saveAndFlush(debt);
 	}
 
@@ -104,7 +116,42 @@ public class DebtService {
 
 		this.calculDebtSolde(journalRow.getCredit());
 		this.calculDebtSolde(journalRow.getDebit());
-	
+
+	}
+
+	// Mise à jour de dêttes
+	public String reloadDebt(Long nsId) {
+
+		// la liste des comptes 1620 & 5120
+		List<String> options = new ArrayList<String>() {
+			{
+				add("1640");
+				add("5120");
+			}
+		};
+
+		for (String option : options) {
+			List<Account> accounts = accountRepository
+					.findAllByNamespaceIdAndNumberStartsWithAndAccountIsNotNullOrderByNumber(nsId, option);
+
+			// boucle sur la liste
+			for (Account account : accounts) {
+
+
+				if(account.getDebt()==null){
+					Debt debt =  this.add(account);
+					account.setDebt(debt);
+				}else{
+				// mise à jour du nom
+				account.getDebt().setName(account.getNumber() + " " + account.getLabel());
+				}
+				accountRepository.saveAndFlush(account);
+				// Mise à jour du montant
+				this.calculDebtSolde(account);
+			}
+		}
+
+		return "Reload Succes.";
 	}
 
 }

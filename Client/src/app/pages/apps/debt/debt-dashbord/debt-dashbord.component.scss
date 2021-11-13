@@ -1,4 +1,4 @@
-.dette{
+.dette,.card-title{
     margin: 12px;
 }
 p{
@@ -10,4 +10,8 @@ p{
     cursor: pointer;
     font-size: 1rem;
     margin-bottom: 5px;
+}
+
+.number{
+    font-weight: bolder;
 }

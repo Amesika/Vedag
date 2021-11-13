@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Debt } from 'src/app/core/models/debt';
 import { DebtService } from 'src/app/core/services/vdg-service/debt.service';
 
@@ -10,7 +10,7 @@ import { DebtService } from 'src/app/core/services/vdg-service/debt.service';
 })
 export class DebtDetailComponent implements OnInit {
 
-  constructor(private routeParams: ActivatedRoute, private debtService: DebtService) { }
+  constructor(private router: Router,private routeParams: ActivatedRoute, private debtService: DebtService) { }
 
   debtId: number;
   debt:Debt = new Debt();
@@ -28,14 +28,18 @@ export class DebtDetailComponent implements OnInit {
 
   // Récupération de la dêtte
   getDebt() {
-    this.debtService.get(this.debtId).subscribe((debt) => {
+    this.debtService.getOneDebt(this.debtId).subscribe((debt) => {
      
       if(!debt["text"]){
         this.debt.setProperies(debt);
+        this.debt.currentAmount = this.debt.currentAmount*-1;
       }
-      
-      console.log(this.debt)
     })
+  }
+
+  // Mise à jour de la dêtte
+  updateDebt(){
+    this.router.navigate(['debt','update']);
   }
 
 }

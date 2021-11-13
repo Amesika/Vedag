@@ -1,10 +1,28 @@
 <div class="card">
-    <div class="card-body p-2">
-        <div>Créditeur {{debt.creditor}}</div>
-        <div>Somme Initial de la dêtte : {{debt.amount}}</div>
-        <div>Somme actuelle : {{debt.currentAmount}}</div>
-        <div>Echéance : {{debt.dueAmount}}</div>
-        <div>Taux du près: {{debt.rate}}%</div>
-        <div>Date de début du prêt : {{debt.startDate}}</div>
+  <div class="card-body pt-2">
+    <div class="dropdown mt-2 float-right" ngbDropdown>
+      <a href="javascript: void(0);" class="dropdown-toggle arrow-none text-muted" ngbDropdownToggle>
+        <i class="uil uil-ellipsis-v"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+        <a class="dropdown-item " (click)="updateDebt()"><i class="uil uil-edit mr-2"></i>Modifier</a>
+      </div>
     </div>
+    <h5 class="header-title">Détail d'une dêtte</h5>
+    <div class="chat-conversation">
+      <div>Nom : {{debt.name}}</div>
+      <div>Description : {{debt.description}}</div>
+      <div>Créditeur : {{debt.creditor}}</div>
+      <div>Somme Initial de la dêtte : <app-number class="number" [value]='debt.amount'></app-number>
+      </div>
+      <div>Somme actuelle : <app-number class="number" [value]='debt.currentAmount'></app-number>
+      </div>
+      <div>Echéance : {{debt.dueAmount}}</div>
+      <div>Nombre d'échéance : {{debt.nbrOfDeadline}}</div>
+      <div>Somme de l'échéance : <app-number class="number" [value]='debt.deadlineAmount'></app-number></div>
+      <div>Taux du près: {{debt.rate}}%</div>
+      <div>Date de début du prêt : {{debt.startDate}}78</div>
+      <div>Date de fin du prêt : {{debt.endDate}}</div>
+    </div>
+  </div>
 </div>

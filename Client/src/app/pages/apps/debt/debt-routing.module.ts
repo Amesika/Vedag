@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DebtDashbordComponent } from './debt-dashbord/debt-dashbord.component';
 import { DebtDetailComponent } from './debt-detail/debt-detail.component';
 import { DebtComponent } from './debt/debt.component';
+import { FormDebtComponent } from './form-debt/form-debt.component';
 
 const routes: Routes = [
     {
@@ -12,9 +13,13 @@ const routes: Routes = [
             path: '',
             component: DebtDashbordComponent,
         }, {
+            path: 'update',
+            component: FormDebtComponent,
+        }, {
             path: ':debtId',
             component: DebtDetailComponent,
-        }]
+        }
+        ]
     },
 
 

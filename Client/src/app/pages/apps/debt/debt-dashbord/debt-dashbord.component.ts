@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountSolde } from 'src/app/core/models/account_solde';
+import { Debt } from 'src/app/core/models/debt';
+import { DebtService } from 'src/app/core/services/vdg-service/debt.service';
 import { FyService } from 'src/app/core/services/vdg-service/fy.service';
 import { JournalRowService } from 'src/app/core/services/vdg-service/jr.service';
 import { NsService } from 'src/app/core/services/vdg-service/ns.service';
@@ -12,11 +14,11 @@ import { NsService } from 'src/app/core/services/vdg-service/ns.service';
 })
 export class DebtDashbordComponent implements OnInit {
 
-  constructor(private router: Router,private nsService: NsService, private fyService: FyService, private jrService: JournalRowService) { }
+  constructor(private router: Router, private nsService: NsService, private debtService: DebtService) { }
 
   debts: AccountSolde[] = [];
 
-  total:number=0;
+  total: number = 0;
 
   ngOnInit() {
     this._fetchData();
@@ -24,22 +26,29 @@ export class DebtDashbordComponent implements OnInit {
 
   private _fetchData() {
 
-    this.jrService.getDebt(this.nsService.currentNs().id, this.fyService.currentFy().id)
-    .subscribe((accountSoldes) => {
-      this.debts = accountSoldes;
-      this.total = 0;
-      accountSoldes.forEach(items => {
-        this.total += items.solde;
+    this.debtService.getDebt(this.nsService.currentNs().id)
+      .subscribe((debts) => {
+        this.debts = debts.map((debt) => {
+          let newDebt = new Debt;
+          newDebt.setProperies(debt);
+          this.total += newDebt.currentAmount;
+          return newDebt
+        })
       });
-    });
 
-   
+
   }
 
-  getDebtDetails(debt){
+  getDebtDetails(debt:Debt) {
     console.log(debt)
-    let debtId =  3208
+    let debtId = debt.id
     this.router.navigate(['/', 'debt', debtId]);
+  }
+
+  reloadDebt() {
+    this.debtService.reloadDebt(this.nsService.currentNs().id).subscribe((data) => {
+      console.log(data);
+    });
   }
 
 }
