@@ -3,7 +3,9 @@ import * as moment from "moment";
 import { Ns } from "src/app/pages/apps/ns/models/ns";
 import { Account } from "./account";
 
-const MOMENT_DATE_FORMER = "MM/DD/YYYY h:mm:ss";
+const MOMENT_DATE_FORMER = "DD-MM-YYYY";
+
+
 
 export class Debt {
 
@@ -11,10 +13,10 @@ export class Debt {
 	id: number;
 
 	/**Nom de la dêtte */
-	name: String;
+	name: string;
 
 	/** Description de la dêttes */
-	description: String;
+	description: string;
 
 	/** Montant Totale de la dêtte */
 	amount: number;
@@ -26,10 +28,10 @@ export class Debt {
 	rate: number;
 
 	/** Date de début */
-	startDate: String;
+	startDate: string;
 
 	/** Créancier */
-	creditor: String;
+	creditor: string;
 
 	/** Compte comptable associer */
 	account: Account;
@@ -47,10 +49,10 @@ export class Debt {
 	nbrOfDeadline: number;
 
 	/** Liste des écheances */
-	listOfDeadlines: String[];
+	listOfDeadlines: string[];
 
 	/** Date de fin */
-	endDate: String;
+	endDate: string;
 
 
 	/** Définition de l'espace de travail */

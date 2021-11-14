@@ -1,3 +1,33 @@
 .dropdown-item{
     cursor: pointer;
 }
+
+.crediteur{
+    text-align: center;
+}
+
+.end{
+    text-align: right;
+}
+
+.date{
+    font-size: 12px;
+}
+
+.currentAmount{
+    font-weight: 900;
+    font-size: 25px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.amount{
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.deadlineAmount{
+    font-weight: 900;
+    font-size: 16px;
+}

@@ -10,19 +10,61 @@
     </div>
     <h5 class="header-title">Détail d'une dêtte</h5>
     <div class="chat-conversation">
-      <div>Nom : {{debt.name}}</div>
-      <div>Description : {{debt.description}}</div>
-      <div>Créditeur : {{debt.creditor}}</div>
-      <div>Somme Initial de la dêtte : <app-number class="number" [value]='debt.amount'></app-number>
+      <div class="row ">
+        <div class="col-12 text-center">
+          <div>Nom : {{debt.name}}</div>
+        </div>
       </div>
-      <div>Somme actuelle : <app-number class="number" [value]='debt.currentAmount'></app-number>
+      <div class="row ">
+        <div class="col-12 date text-center">
+          <div><i>Description : {{debt.description}}</i></div>
+        </div>
       </div>
-      <div>Echéance : {{debt.dueAmount}}</div>
-      <div>Nombre d'échéance : {{debt.nbrOfDeadline}}</div>
-      <div>Somme de l'échéance : <app-number class="number" [value]='debt.deadlineAmount'></app-number></div>
-      <div>Taux du près: {{debt.rate}}%</div>
-      <div>Date de début du prêt : {{debt.startDate}}78</div>
-      <div>Date de fin du prêt : {{debt.endDate}}</div>
+      <div class="row ">
+        <div class="col-12 currentAmount text-center">
+          <div>Somme actuelle : <app-number class="number" [value]='debt.currentAmount*-1'></app-number>
+          </div>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-12 amount text-center">
+          <div>Somme Initial de la dêtte : <app-number class="number" [value]='debt.amount'></app-number>
+          </div>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-12 deadlineAmount text-center">
+          <span>Somme de l'échéance : <app-number class="number" [value]='debt.deadlineAmount'></app-number>
+          </span> - <span>Taux du près: {{debt.rate}}%</span>
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class="col-12 text-center">
+          <div>Nombre d'échéance : {{debt.nbrOfDeadline}}</div>
+        </div>
+      </div>
+
+      <br>
+      <div class="row ">
+        <div class="col-12">
+          <div>Echéance : {{debt.dueAmount}}</div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <hr>
+      <div class="row justify-content-between">
+        <div class="col-3 date">
+          <i class="uil uil-calendar-alt mr-2"></i>Date de début : {{debt.startDate}}
+        </div>
+        <div class="col-4 crediteur">
+          <i class="uil uil-user mr-2"></i>Créditeur : {{debt.creditor}}
+        </div>
+        <div class="col-3 end date">
+          <i class="uil uil-calendar-alt mr-2"></i>Date de fin : {{debt.endDate}}
+        </div>
+      </div>
     </div>
   </div>
 </div>

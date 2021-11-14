@@ -15,7 +15,7 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label class="control-label">Montant</label>
-                        <input class="form-control" placeholder="Montant" type="text" name="amount"
+                        <input class="form-control" placeholder="Montant" type="number" name="amount"
                             formControlName="amount">
                     </div>
                 </div>
@@ -26,20 +26,27 @@
                             formControlName="description"></textarea>
                     </div>
                 </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="control-label">Créditeur</label>
+                        <input class="form-control" placeholder="Créditeur" type="text" name="creditor"
+                            formControlName="creditor">
+                    </div>
+                </div>
                 <div class="col-9">
                     <div class="form-group">
                         <label class="control-label">Montant actuel</label>
-                        <input class="form-control" readonly placeholder="Montant actuel" type="text"
+                        <input class="form-control" readonly placeholder="Montant actuel" type="number"
                             name="currentAmount" formControlName="currentAmount">
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="form-group">
                         <label class="control-label">Taux</label>
-                        <input class="form-control" placeholder="Taux" type="text" name="rate" formControlName="rate">
+                        <input class="form-control" placeholder="Taux" type="number" name="rate" formControlName="rate">
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-12">
                     <div class="form-group">
                         <label class="control-label">Date de début</label>
                         <input class="form-control" placeholder="Date de début" type="date" name="startDate"
@@ -48,22 +55,17 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label class="control-label">Date de fin</label>
-                        <input class="form-control" placeholder="Date de fin" type="date" name="endDate"
-                            formControlName="endDate">
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label class="control-label">Montant de l'écheance</label>
-                        <input class="form-control" placeholder="Montant de l'écheance" type="text"
-                            name="deadlineAmount" formControlName="deadlineAmount">
+                        <label class="control-label">Montant de l'écheance </label>
+                        <input class="form-control" (change)="handleRange()" placeholder="Montant de l'écheance"
+                            type="number" min="0" [max]="rangMax" name="deadlineAmount"
+                            formControlName="deadlineAmount">
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label class="control-label">Nombre de l'écheance</label>
-                        <input class="form-control" placeholder="Nombre de l'écheance" type="text" name="nbrOfDeadline"
+                        <input class="form-control" min="1" [max]="rangMax" (keyup)="handleNbrOfDeadline($event)"
+                            placeholder="Nombre de l'écheance" type="number" name="nbrOfDeadline"
                             formControlName="nbrOfDeadline">
                     </div>
                 </div>

@@ -32,14 +32,15 @@ export class DebtDetailComponent implements OnInit {
      
       if(!debt["text"]){
         this.debt.setProperies(debt);
-        this.debt.currentAmount = this.debt.currentAmount*-1;
+        
       }
     })
   }
 
   // Mise à jour de la dêtte
   updateDebt(){
-    this.router.navigate(['debt','update']);
+    this.router.navigate(['debt','update'], { state: { 
+      debt: this.debt
+    } });
   }
-
 }
