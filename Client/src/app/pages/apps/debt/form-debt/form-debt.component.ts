@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { Debt } from 'src/app/core/models/debt';
 import { DebtService } from 'src/app/core/services/vdg-service/debt.service';
 import { NsService } from 'src/app/core/services/vdg-service/ns.service';
+const MOMENT_FR_FORMER = "DD-MM-YYYY";
 const MOMENT_DATE_FORMER = "YYYY-MM-DD";
 
 @Component({
@@ -37,8 +38,16 @@ export class FormDebtComponent implements OnInit {
   ngOnInit() {
 
     const {debt} = history.state
+
+    if(debt == undefined){
+      this.router.navigate(['/', 'debt']);
+    }
     this.debt = debt;
     console.log(this.debt);
+    console.log(this.debt.startDate);
+    console.log([moment(this.debt.startDate,MOMENT_FR_FORMER).format(MOMENT_DATE_FORMER)]);
+    console.log([moment(this.debt.startDate)]);
+    console.log([moment(this.debt.startDate,MOMENT_FR_FORMER)]);
 
     if (this.debt) {
       this.debtForm = this.formBuilder.group({
@@ -46,9 +55,9 @@ export class FormDebtComponent implements OnInit {
         amount: [this.debt.amount],
         currentAmount: [this.debt.currentAmount*-1],
         rate: [this.debt.rate],
-        startDate: [moment(this.debt.startDate).format(MOMENT_DATE_FORMER)],
+        startDate: [moment(this.debt.startDate,MOMENT_FR_FORMER).format(MOMENT_DATE_FORMER)],
         creditor: [this.debt.creditor],
-        endDate:  [moment(this.debt.endDate).format(MOMENT_DATE_FORMER)],
+        endDate:  [moment(this.debt.endDate,MOMENT_FR_FORMER).format(MOMENT_DATE_FORMER)],
         deadlineAmount: [this.debt.deadlineAmount],
         description: [this.debt.description],
         nbrOfDeadline: [this.debt.nbrOfDeadline],

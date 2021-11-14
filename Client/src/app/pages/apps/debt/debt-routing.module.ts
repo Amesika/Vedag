@@ -7,23 +7,21 @@ import { FormDebtComponent } from './form-debt/form-debt.component';
 
 const routes: Routes = [
     {
+        path: 'debt/update',
+        component: FormDebtComponent,
+    },
+    {
         path: 'debt',
         component: DebtComponent,
         children: [{
             path: '',
             component: DebtDashbordComponent,
         }, {
-            path: 'update',
-            component: FormDebtComponent,
-        }, {
             path: ':debtId',
             component: DebtDetailComponent,
         }
         ]
-    },
-
-
-
+    }
 ];
 
 @NgModule({

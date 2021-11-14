@@ -57,6 +57,9 @@ public class Debt {
 
 	@Column()
 	private float deadlineAmount;
+	
+	@Column()
+	private float dueAmount;
 
 	@ManyToOne
 	@JoinColumn(name = "namespace_id", foreignKey = @ForeignKey(name = "FK_DEBT_NS"))
