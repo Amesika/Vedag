@@ -21,6 +21,8 @@ export class DebtService {
     href = environment.base_url;
     apiUrl = '/api/v1/debt'
 
+    currentDebt = new Debt();
+
     constructor(protected _http: HttpClient) {
     }
 
@@ -30,24 +32,35 @@ export class DebtService {
         return this._http.get<any>(requestUrl)
     }
 
-    //Récuperer une dêtte
+    //Récuperer des dêttes
     getDebt(nsId: number) {
         const requestUrl = `${this.href}${this.apiUrl}?nsId=${nsId}`;
         return this._http.get<any>(requestUrl)
     }
 
     // Mise à jour des soldes
-    reloadDebt(nsId:number): Observable<any> {
+    reloadDebt(nsId: number): Observable<any> {
         const requestUrl = `${this.href}${this.apiUrl}/reload?nsId=${nsId}`
-        console.log(requestUrl);
         return this._http.get<any>(requestUrl);
     }
 
     // Modification d'une dette
-    putDebt(debt: Debt) : Observable<Debt> {
+    putDebt(debt: Debt): Observable<Debt> {
         const requestUrl = `${this.href}${this.apiUrl}`
-        return this._http.put<Debt>(requestUrl,debt);
+        return this._http.put<Debt>(requestUrl, debt);
     }
-  
+
+    //Récuperer du nombre max déchéance
+    getMaxDeadlineNbr(nsId: number) {
+        const requestUrl = `${this.href}${this.apiUrl}/max-deadline-nbr?nsId=${nsId}`;
+        return this._http.get<any>(requestUrl)
+    }
+
+
+    setCurrentDebt(debt){
+        this.currentDebt = debt;
+    }
+
+
 
 }

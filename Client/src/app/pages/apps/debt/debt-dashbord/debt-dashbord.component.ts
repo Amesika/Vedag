@@ -40,7 +40,6 @@ export class DebtDashbordComponent implements OnInit {
   }
 
   getDebtDetails(debt:Debt) {
-    console.log(debt)
     let debtId = debt.id
     this.router.navigate(['/', 'debt', debtId]);
   }

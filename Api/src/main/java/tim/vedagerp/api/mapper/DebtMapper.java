@@ -7,13 +7,21 @@ import java.util.Collection;
 import java.util.List;
 
 import org.mapstruct.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import tim.vedagerp.api.entities.Debt;
 import tim.vedagerp.api.helper.DateFormer;
 import tim.vedagerp.api.model.DebtDTO;
+import tim.vedagerp.api.services.DebtService;
+
+
+
 
 @Mapper
 public abstract class DebtMapper {
+
+    
+	
 
     public DebtDTO toDebtDTO(Debt debt) throws ParseException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DateFormer.DATE_FORMAT);
@@ -32,6 +40,11 @@ public abstract class DebtMapper {
         //debtDto.setAccount(debt.getAccount());
         debtDto.setNamespace(debt.getNamespace());
         debtDto.updateProperties();
+        
+        // Récupération du nombre d'échéance max
+        //debtDto.setMaxOfDeadline(max);   
+    
+        
         return debtDto;
     }
 

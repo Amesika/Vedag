@@ -30,4 +30,9 @@ public interface DebtRepository extends JpaRepository<Debt, Long> {
     +"ORDER BY debt.name", nativeQuery = true)
 	List<Debt> getDebts(@Param("nsid") Long nsId);
 
+    @Query(value = "SELECT MAX (ROUND ( ABS(current_amount)/(deadline_amount) )) as nbr FROM public.debt "
+    +"WHERE debt.namespace_id=:nsid "
+    +"AND debt.deadline_amount!=0 ", nativeQuery = true)
+	int getMaxDeadlineNumber(@Param("nsid") Long nsId);
+
 }

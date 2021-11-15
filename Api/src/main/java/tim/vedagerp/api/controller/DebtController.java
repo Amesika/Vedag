@@ -80,6 +80,20 @@ public class DebtController {
 
 	}
 
+	@GetMapping("/max-deadline-nbr")
+	public ResponseEntity<?> getMaxDeadlineNbr(@RequestParam("nsId") Long nsId) throws ParseException {
+		logger.info("getMaxDeadlineNbr");
+		try {
+			int nbr = debtService.getMaxDeadlineNumber(nsId);
+			return new ResponseEntity<>(nbr, HttpStatus.OK);
+		} catch (NoSuchElementException ex) {
+			Message res = new Message();
+			res.setText(String.format("Pas de valeur pour id: %d", nsId));
+			return new ResponseEntity<>(res, HttpStatus.OK);
+		}
+
+	}
+
 	@GetMapping("/reload")
 	public ResponseEntity<?> getReloadDebt(@RequestParam("nsId") long nsId) {
 		logger.info("getReloadDebt");

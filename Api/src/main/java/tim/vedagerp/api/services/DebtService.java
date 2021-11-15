@@ -154,4 +154,10 @@ public class DebtService {
 		return "Reload Succes.";
 	}
 
+
+	// Récupération du nombre max des écheances
+	public int getMaxDeadlineNumber(Long nsId) {
+
+		return debtRepository.getMaxDeadlineNumber(nsId)+1;
+	}
 }

@@ -19,19 +19,7 @@ const revenueAreaChart: ChartType = {
   series: [
     {
       name: "PRODUCT A",
-      data: [44, 55, 41, 67, 22, 43, 0, 0, 0, 0, 0, 0]
-    },
-    {
-      name: "PRODUCT B",
-      data: [13, 23, 20, 8, 13, 27, 0, 0, 0, 0, 0, 0]
-    },
-    {
-      name: "PRODUCT C",
-      data: [11, 17, 15, 15, 21, 14, 0, 0, 0, 0, 0, 0]
-    },
-    {
-      name: "PRODUCT D",
-      data: [21, 7, 25, 13, 22, 8, 0, 0, 0, 0, 0, 0]
+      data: [44, 55, 41, 67, 22, 43]
     }
   ],
   chart: {
@@ -64,20 +52,7 @@ const revenueAreaChart: ChartType = {
   },
   xaxis: {
     type: "category",
-    categories: [
-      "01/2021",
-      "02/2021",
-      "03/2021",
-      "04/2021",
-      "05/2021",
-      "06/2021",
-      "07/2021",
-      "08/2021",
-      "09/2021",
-      "10/2021",
-      "11/2021",
-      "12/2021"
-    ]
+    categories: []
   },
   legend: {
     position: "right",

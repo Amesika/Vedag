@@ -37,27 +37,22 @@ export class FormDebtComponent implements OnInit {
 
   ngOnInit() {
 
-    const {debt} = history.state
+    const { debt } = history.state
 
-    if(debt == undefined){
+    if (debt == undefined) {
       this.router.navigate(['/', 'debt']);
     }
     this.debt = debt;
-    console.log(this.debt);
-    console.log(this.debt.startDate);
-    console.log([moment(this.debt.startDate,MOMENT_FR_FORMER).format(MOMENT_DATE_FORMER)]);
-    console.log([moment(this.debt.startDate)]);
-    console.log([moment(this.debt.startDate,MOMENT_FR_FORMER)]);
 
     if (this.debt) {
       this.debtForm = this.formBuilder.group({
         name: [this.debt.name],
         amount: [this.debt.amount],
-        currentAmount: [this.debt.currentAmount*-1],
+        currentAmount: [this.debt.currentAmount * -1],
         rate: [this.debt.rate],
-        startDate: [moment(this.debt.startDate,MOMENT_FR_FORMER).format(MOMENT_DATE_FORMER)],
+        startDate: [moment(this.debt.startDate, MOMENT_FR_FORMER).format(MOMENT_DATE_FORMER)],
         creditor: [this.debt.creditor],
-        endDate:  [moment(this.debt.endDate,MOMENT_FR_FORMER).format(MOMENT_DATE_FORMER)],
+        endDate: [moment(this.debt.endDate, MOMENT_FR_FORMER).format(MOMENT_DATE_FORMER)],
         deadlineAmount: [this.debt.deadlineAmount],
         description: [this.debt.description],
         nbrOfDeadline: [this.debt.nbrOfDeadline],
@@ -80,10 +75,9 @@ export class FormDebtComponent implements OnInit {
     this.rangMax = this.debtForm.controls['currentAmount'].value;
     this.handleRange();
     this.correction();
-    console.log(this.debtForm.controls['startDate'].value)
 
-  } 
-  
+  }
+
   crudDebt() {
     this.submitted = true;
 
@@ -95,12 +89,12 @@ export class FormDebtComponent implements OnInit {
     debt.namespace = this.nsService.currentNs()
 
     debt = this.debt;
-    
+
     if (this.debtForm.valid) {
       debt.name = this.debtForm.get('name').value;
       debt.amount = this.debtForm.get('amount').value;
       debt.dueAmount = this.debtForm.get('amount').value;
-      debt.currentAmount = this.debtForm.get('currentAmount').value*-1;
+      debt.currentAmount = this.debtForm.get('currentAmount').value * -1;
       debt.rate = this.debtForm.get('rate').value;
       debt.startDate = this.debtForm.get('startDate').value;
       debt.creditor = this.debtForm.get('creditor').value;
@@ -109,17 +103,13 @@ export class FormDebtComponent implements OnInit {
       debt.description = this.debtForm.get('description').value;
       debt.nbrOfDeadline = this.debtForm.get('nbrOfDeadline').value;
 
-      console.log(debt)
-
       this.debtService.putDebt(debt).subscribe(() => {
-        console.log(debt)
         this.callDebtFormEvent('update')
       })
     }
   }
 
-  correction(){
-    console.log(this.debtForm.controls['nbrOfDeadline'].value)
+  correction() {
     if (this.debtForm.controls['nbrOfDeadline'].value === Infinity) {
       this.debtForm.patchValue({
         nbrOfDeadline: 1
@@ -162,7 +152,6 @@ export class FormDebtComponent implements OnInit {
 
   // Range change 
   handleRange() {
-    console.log("handleRange")
     // Calcule du nombre d'écheance
     let nbr = 0;
 
@@ -187,13 +176,9 @@ export class FormDebtComponent implements OnInit {
 
     event.preventDefault();
     let range = 0;
-    console.log("handleNbrOfDeadline")
     if (this.debtForm.controls['nbrOfDeadline'].value !== 0) {
       range = Math.floor(this.debtForm.controls['currentAmount'].value / this.debtForm.controls['nbrOfDeadline'].value);
     }
-
-   
-
     this.debtForm.patchValue({
       deadlineAmount: range
     })

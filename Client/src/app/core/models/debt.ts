@@ -48,6 +48,9 @@ export class Debt {
 	/** Nombre des échénances */
 	nbrOfDeadline: number;
 
+	/** Nombre des échénances max */
+	maxOfDeadline: number;
+
 	/** Liste des écheances */
 	listOfDeadlines: string[];
 
@@ -73,11 +76,11 @@ export class Debt {
 		this.deadlineAmount = debt.deadlineAmount;
 		this.description = debt.description;
 		this.nbrOfDeadline = debt.nbrOfDeadline;
+		this.maxOfDeadline = debt.maxOfDeadline;
 		this.name = debt.name;
 
 		let namespace = new Ns()
 		namespace.setProperies(debt.namespace);
 		this.namespace = namespace; 
-
 	}
 }

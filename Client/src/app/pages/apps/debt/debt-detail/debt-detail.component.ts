@@ -31,9 +31,11 @@ export class DebtDetailComponent implements OnInit {
     this.debtService.getOneDebt(this.debtId).subscribe((debt) => {
      
       if(!debt["text"]){
-        this.debt.setProperies(debt);
-        
+        this.debt.setProperies(debt);        
       }
+      this.debtService.setCurrentDebt(this.debt);
+
+      console.log(debt);
     })
   }
 

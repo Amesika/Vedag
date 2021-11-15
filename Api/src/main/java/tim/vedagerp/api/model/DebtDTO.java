@@ -61,6 +61,9 @@ public class DebtDTO {
 	/** Nombre des échénances */
 	private int nbrOfDeadline;
 
+	/** Nombre des échénances max */
+	private int maxOfDeadline;
+
 	/** Liste des écheances */
 	private List<String> listOfDeadlines;
 
@@ -98,6 +101,8 @@ public class DebtDTO {
 		endDate = DateFormer.addMonthToDate(endDate,this.nbrOfDeadline);
 		
 		this.endDate =simpleDateFormat.format(endDate);
+
+
 	}
 
 }
