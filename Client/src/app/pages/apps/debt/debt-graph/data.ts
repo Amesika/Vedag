@@ -52,7 +52,7 @@ const revenueAreaChart: ChartType = {
   },
   xaxis: {
     type: "category",
-    categories: []
+    categories: [44, 55, 41, 67, 22, 43]
   },
   legend: {
     position: "right",
