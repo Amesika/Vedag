@@ -20,6 +20,8 @@ import tim.vedagerp.api.entities.JournalRow;
 import tim.vedagerp.api.helper.DateFormer;
 import tim.vedagerp.api.mapper.DebtMapper;
 import tim.vedagerp.api.model.DebtDTO;
+import tim.vedagerp.api.model.IMaxInfo;
+import tim.vedagerp.api.model.MaxInfoDTO;
 import tim.vedagerp.api.repositories.AccountRepository;
 import tim.vedagerp.api.repositories.DebtRepository;
 
@@ -156,8 +158,10 @@ public class DebtService {
 
 
 	// Récupération du nombre max des écheances
-	public int getMaxDeadlineNumber(Long nsId) {
+	public MaxInfoDTO getMaxDeadlineNumber(Long nsId) {
 
-		return debtRepository.getMaxDeadlineNumber(nsId)+1;
+		IMaxInfo dataIMaxinfo = debtRepository.getMaxDeadlineNumber(nsId);
+		MaxInfoDTO maxInfoDto = new MaxInfoDTO(dataIMaxinfo);
+		return maxInfoDto;
 	}
 }

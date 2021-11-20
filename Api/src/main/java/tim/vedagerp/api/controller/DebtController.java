@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import tim.vedagerp.api.entities.Debt;
 import tim.vedagerp.api.mapper.DebtMapper;
 import tim.vedagerp.api.model.DebtDTO;
+import tim.vedagerp.api.model.MaxInfoDTO;
 import tim.vedagerp.api.model.Message;
 import tim.vedagerp.api.services.DebtService;
 
@@ -84,8 +85,8 @@ public class DebtController {
 	public ResponseEntity<?> getMaxDeadlineNbr(@RequestParam("nsId") Long nsId) throws ParseException {
 		logger.info("getMaxDeadlineNbr");
 		try {
-			int nbr = debtService.getMaxDeadlineNumber(nsId);
-			return new ResponseEntity<>(nbr, HttpStatus.OK);
+			MaxInfoDTO maxInfoDto = debtService.getMaxDeadlineNumber(nsId);
+			return new ResponseEntity<>(maxInfoDto, HttpStatus.OK);
 		} catch (NoSuchElementException ex) {
 			Message res = new Message();
 			res.setText(String.format("Pas de valeur pour id: %d", nsId));

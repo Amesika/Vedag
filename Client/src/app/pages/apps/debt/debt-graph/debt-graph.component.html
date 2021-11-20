@@ -5,7 +5,7 @@
           <a class="nav-link active" href="javascript: void(0);">1y</a>
         </li>
       </ul>
-      <h5 class="card-title header-title mb-0">Graph dêtte {{debt.name}}</h5>
+      <h5 class="card-title header-title mb-0">Graph dêtte {{debt?.name}}</h5>
       <!-- Reenue Area Chart -->
       <div class="mt-3" *ngIf="show">
         <apx-chart [series]="revenueAreaChart.series" [chart]="revenueAreaChart.chart"

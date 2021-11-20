@@ -13,6 +13,7 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { FormDebtComponent } from './form-debt/form-debt.component';
 import { DebtGraphComponent } from './debt-graph/debt-graph.component';
+import { DebtListComponent } from './debt-list/debt-list.component';
 
 @NgModule({
   declarations: [
@@ -20,9 +21,10 @@ import { DebtGraphComponent } from './debt-graph/debt-graph.component';
     DebtDashbordComponent,
     DebtDetailComponent,
     FormDebtComponent,
-    DebtGraphComponent
+    DebtGraphComponent,
+    DebtListComponent
   ],
-  exports:[DebtComponent,DebtDashbordComponent],
+  exports:[DebtComponent,DebtListComponent],
   imports: [
     CommonModule,
     ComptableRoutingModule,
